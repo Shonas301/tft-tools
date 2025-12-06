@@ -1,0 +1,237 @@
+name,icon,minUnits,description,units
+Arcanist,https://cdn.metatft.com/file/metatft/traits/arcanist.png,2; 4; 6,"Your team gains Ability Power, Arcanists gain more.
+(2) 18% , 25%  for Arcanists(4) 25% , 40%  for Arcanists(6) 40% , 60%  for Arcanists",Kog'Maw; Lulu; Neeko; Ahri; Lux; Swain; Veigar; Annie; Sylas
+Ascendant,https://cdn.metatft.com/file/metatft/traits/ascendant.png,1,"After each combat, an Ascendant Charm appears in your shop. These are powerful effects that can be bought for gold.",Xerath
+Assimilator,https://cdn.metatft.com/file/metatft/traits/assimilator.png,1,Kai'Sa has a different Ability depending if her Attack Damage or Ability Power is higher.,Kai'Sa
+Bilgewater,https://cdn.metatft.com/file/metatft/traits/bilgewater.png,3; 5; 7; 10,"Each round, gain Silver Serpents (%i:scaleSerpents%), plus 2 additional for each Bilgewater takedown.
+
+Silver Serpents can be spent in the Black Market to grant Bilgewater champions bonus stats and special loot. Higher tiers unlock rarer loot.
+
+
+(3) 18 %i:scaleSerpents%
+
+(5) 30 %i:scaleSerpents%, improved loot
+
+(7) 55 %i:scaleSerpents%, superior loot
+
+(10) 150 %i:scaleSerpents%, 2x stats, FIRE CANNONS!
+
+Current Bonus Stats:
+X , X , X 
+
+Current Serpents: X %i:scaleSerpents%",Illaoi; Graves; Twisted Fate; Gangplank; Nautilus; Fizz; Miss Fortune; Tahm Kench
+Blacksmith,https://cdn.metatft.com/file/metatft/traits/blacksmith.png,1,"After each player combat your strongest Ornn participates in, he makes progress forging an Artifact item.
+
+Each item he is equipped with grants him 250/450/2000 max Health. Artifacts grant 300% more.
+
+Forging Progress: X/4",Ornn
+Bruiser,https://cdn.metatft.com/file/metatft/traits/bruiser.png,2; 4; 6,"Your team gains 150 maximum Health. Bruisers gain more.
+(2) 25% (4) 45% (6) 65%",Illaoi; Shen; Sion; Dr. Mundo; Kobuko & Yuumi; Rift Herald; Wukong; Tahm Kench; Volibear
+Caretaker,https://cdn.metatft.com/file/metatft/traits/caretaker.png,1,"After winning player combat, gain a random unit from Runeterra. After losing combat, gain free rerolls, with the amount increasing by stage.
+
+Rerolls on Loss: 2",Bard
+Chainbreaker,https://cdn.metatft.com/file/metatft/traits/chainbreaker.png,1,"Sylas rotates between 3 different Abilities, depending on which one is most useful at the moment. He cannot cast the same one twice in a row.",Sylas
+Chosen Wolves,https://cdn.metatft.com/file/metatft/traits/chosenwolves.png,2,"When Kindred casts, Ambessa always gains their protection against death and gains 30% Attack Damage while protected.
+
+When Ambessa casts, Wolf strikes all enemies hit, dealing 25% damage.",
+Chronokeeper,https://cdn.metatft.com/file/metatft/traits/chronokeeper.png,1,"Every 2 casts, the Chronokeeper stores 1 XP. If he has enough stored for you to level up, he transfers you the required XP.
+
+If you are level 10, he instead gains 15% Damage Amp.
+
+Stored XP: X",Zilean
+Dark Child,https://cdn.metatft.com/file/metatft/traits/darkchild.png,1,"Annie summons Tibbers on your bench. He can be fielded, takes up a team slot, and can be equipped with items separately. His star level is the same as Annie's.",Annie
+Darkin,https://cdn.metatft.com/file/metatft/traits/darkin.png,1; 2; 3,"(1) Darkin gain 15% Omnivamp.
+
+(2) AND you heal for 25% of the player damage you deal.
+
+(3) AND whenever Darkin restore 600 Health, they deal 100 magic damage to the 2 closest enemies.",Aatrox; Zaahen
+Defender,https://cdn.metatft.com/file/metatft/traits/defender.png,2; 4; 6,"Your team gains 12 Armor and Magic Resist. Defenders gain more.
+(2) 30 (4) 55 (6) 80",Jarvan IV; Rumble; Neeko; Vi; Darius; Kennen; Sejuani; Garen; Sylas
+Demacia,https://cdn.metatft.com/file/metatft/traits/demacia.png,3; 5; 7; 11,"Each time your team loses 25% max Health, Demacians Rally, reducing their Mana cost by 10%. Demacians gain Armor and Magic Resist.
+
+
+(3) 12 
+
+(5) 35 
+
+(7) 35 . On Rally, smite enemies for 5% of their max Health.
+
+(11) 150 . BATTLE FOR DEMACIA!",Jarvan IV; Sona; Poppy; Xin Zhao; Vayne; Garen; Lux; Galio
+Disruptor,https://cdn.metatft.com/file/metatft/traits/disruptor.png,2; 4,"Disruptors' abilities Dazzle enemies hit. Disruptors deal bonus damage to Dazzled enemies.
+(2) 18% bonus damage(4) 40% bonus damage",Ekko; Gwen; Malzahar; Seraphine; Azir; Mel
+Dragonborn,https://cdn.metatft.com/file/metatft/traits/dragonborn.png,1,"On cast, Shyvana replaces her spell with Flame Breath. While transformed, all allies take 10% less damage from enemy Abilities.",Shyvana
+Dragonguards,https://cdn.metatft.com/file/metatft/traits/dragonguards.png,2,"When Jarvan casts, Shyvana gains 100% of the Shield. When Shyvana casts, Jarvan jumps in and deals 220% of his Armor and Magic Resist as magic damage in a 2-hex radius.",
+Emperor,https://cdn.metatft.com/file/metatft/traits/emperor.png,1,"Azir deploys two Guards who can be placed anywhere on the battlefield. They do not move or attack, and die when Azir does.",Azir
+Eternal,https://cdn.metatft.com/file/metatft/traits/eternal.png,1,"Every 3rd attack from Kindred on the same enemy deals 350% damage, as Wolf mauls their target.",Kindred
+Freljord,https://cdn.metatft.com/file/metatft/traits/freljord.png,3; 5; 7,"Summon a Frozen Tower. Allies in front of it gain Health and allies behind it gain Damage Amp.
+
+Freljordians gain 150% more.
+
+
+(3) 8% , 10% 
+
+(5) Two Towers. 12% , 16% 
+
+(7) Towers stun enemies on death for 1.5 seconds. 16% , 22% .",Anivia; Ashe; Tryndamere; Sejuani; Braum; Lissandra; Volibear
+Glutton,https://cdn.metatft.com/file/metatft/traits/glutton.png,1,"Once per Planning phase, you can feed Tahm Kench a champion, permanently granting him either Health, Attack Speed, or Ability Power based on their role and star level.
+
+To feed, hold an ally from the bench over Tahm Kench until his mouth opens, then release.
+
+Current Stats: X , X , X",Tahm Kench
+Gunslinger,https://cdn.metatft.com/file/metatft/traits/gunslinger.png,2; 4,"Gunslingers gain Attack Damage. Every 4th attack from Gunslingers deals bonus physical damage.
+(2) 20% , 100 bonus damage(4) 35% , 200 bonus damage",Jhin; Graves; Tristana; Jinx; Miss Fortune; Lucian & Senna; T-Hex
+Harvester,https://cdn.metatft.com/file/metatft/traits/harvester.png,1,"Each time an enemy champion dies, gain 10 Mana. Casting abilities does not consume Mana.
+
+All enemies lose 10 Armor and Magic Resist.",Fiddlesticks
+Heroic,https://cdn.metatft.com/file/metatft/traits/heroic.png,1,"Galio cannot be fielded in combat. Instead, his traits count from the bench and when Demacians Rally, he joins the fight.
+
+On landing, he creates a 3-hex shockwave that deals 10% of his max Health as magic damage. Enemies hit are knocked up for 1 seconds, reduced by distance from the center.",Galio
+HexMech,https://cdn.metatft.com/file/metatft/traits/hexmech.png,1,"Gain a Pilot Hex. Combat Start: the unit within jumps into T-Hex, granting her 80% of their Health and bonus stats based on their role and star level.
+
+Tank: +15/25/40% Omnivamp
+Fighter: +15/25/40% Attack Damage
+Marksman: +10/18/30% Damage Amp
+Caster: +3/6/12 Mana Regen
+Assassin: +30/60/100% Crit Chance
+
+On death, the pilot ejects while T-Hex knocks back and Stuns nearby enemies for 1.5 seconds.",T-Hex
+Huntress,https://cdn.metatft.com/file/metatft/traits/huntress.png,1,"While your strongest Neeko is alive, your strongest Nidalee cannot be targeted by basic attacks and gains 50% Durability.",Nidalee
+Immortal,https://cdn.metatft.com/file/metatft/traits/immortal.png,1,"While Xin Zhao is not on your board, Zaahen gains the Ionia, Demacia, and Warden traits.
+
+On kill, Zaahen gains a stack of Determination for the rest of combat. If he has 3 or more Determination when dying, he spends it to revive and restore 60% max Health.",Zaahen
+Invoker,https://cdn.metatft.com/file/metatft/traits/invoker.png,2; 4,"Your team gains 1 Mana Regen. Invokers gain more Mana from all sources.
+(2) 25% more Mana(4) 40% more Mana",Anivia; Sona; Orianna; Kobuko & Yuumi; LeBlanc; Milio; Lissandra; Zilean
+Ionia,https://cdn.metatft.com/file/metatft/traits/ionia.png,3; 5; 7; 10,"Ionians gain Shield, Attack Damage, and Ability Power. Each game, they walk a different path.
+
+
+
+
+(3) @ShieldAmount*100@%  Shield, @ADAP*100@% 
+
+(5) @ShieldAmount*100@%  Shield, @ADAP*100@% 
+
+(7) @ShieldAmount*100@%  Shield, @ADAP*100@%",Jhin; Shen; Xin Zhao; Yasuo; Ahri; Kennen; Wukong; Yone; Yunara; Sett
+Ixtal,https://cdn.metatft.com/file/metatft/traits/ixtal.png,3; 5; 7,"(3) Complete Quests to earn Sunshards () and spend them for loot!
+
+(5) Heal 2 player health at the start of each player combat.
+
+(7) After winning combat, find 50  and unearth bonus loot.
+
+Completing a Quest before combat ends grants you a new one at the start of next round.",Qiyana; Neeko; Milio; Nidalee; Skarner; Brock
+Juggernaut,https://cdn.metatft.com/file/metatft/traits/juggernaut.png,2; 4; 6,"Juggernauts gain Durability, increased while above 50% health. When a Juggernaut dies, other Juggernauts heal for 5% of their max Health.
+(2) 18% or 25% (4) 20% or 30% (6) 25% or 33%",Blitzcrank; Briar; Cho'Gath; Poppy; Nautilus; Singed; Swain; Shyvana
+Longshot,https://cdn.metatft.com/file/metatft/traits/longshot.png,2; 3; 4; 5,"Longshots gain Damage Amp and deal more damage to targets farther away.
+(2) 18%  + 2% per Hex(3) 24%  + 3% per Hex(4) 28%  + 4% per Hex(5) 32%  + 5% per Hex",Caitlyn; Kog'Maw; Teemo; Vayne; Kai'Sa; Ziggs
+Noxus,https://cdn.metatft.com/file/metatft/traits/noxus.png,3; 5; 7; 10,"After the enemy team has lost 15% of their Health, summon Atakhan, Bringer of Ruin. Each Noxian champion's star level increases his power.
+
+
+(3) He slashes enemies, dealing magic damage.
+
+(5) Noxians get more powerful the longer he is alive.
+
+(7) He drains the souls of enemies on cast.
+
+(10) After 10 seconds, BRING RUIN.",Briar; Sion; Darius; Draven; LeBlanc; Ambessa; Swain; Mel
+Piltover,https://cdn.metatft.com/file/metatft/traits/piltover.png,2; 4; 6,"Build an invention on the right side of the board. After 8 seconds, the invention activates, triggering each of its Modules.
+
+
+(2) Choose a Module
+
+(4) Choose a Second Module
+
+(6) Choose a Third Module",Caitlyn; Orianna; Vi; Loris; Seraphine; T-Hex
+Poison Pals,https://cdn.metatft.com/file/metatft/traits/poisonpals.png,2,"Every 3 seconds, Teemo fires a dart at Singed's current target, dealing 50% damage.
+
+When an enemy poisoned by Teemo dies, Singed gains Move Speed and 40% Ability Power.",
+Quickstriker,https://cdn.metatft.com/file/metatft/traits/quickstriker.png,2; 3; 4; 5,"Your team gains 15% Attack Speed. Quickstrikers gain bonus Attack Speed based on their target's missing Health.
+
+
+(2) 10-30% 
+
+(3) 20-45% 
+
+(4) 30-60% 
+
+(5) 40-80%",Viego; Ashe; Twisted Fate; Draven; Warwick; Yunara; Kindred
+Riftscourge,https://cdn.metatft.com/file/metatft/traits/riftscourge.png,1,"Baron Nashor takes up 2 team slots and grants +2 to the Void trait.
+
+After 8 seconds, the board enters a Void Rift. The Rift grants Void units 30% Damage Amp and constantly strikes enemies with bolts of plasma, dealing 5% max Health as magic damage.",Baron Nashor
+Rune Mage,https://cdn.metatft.com/file/metatft/traits/runemage.png,1,"The Rune Mage benefits from all active Region traits, but contributes to none.
+
+He harnesses the Runic power from active Region traits to modify his Ability, enhancing it in unique ways.",Ryze
+Sentinels of Light,https://cdn.metatft.com/file/metatft/traits/sentinelsoflight.png,2,"When Vayne casts on an enemy afflicted with Black Mist, she fires 2 extra bolts at 25% effectiveness. When she gets a takedown, Lucian and Senna gain 50% Attack Speed.",
+Shadow Isles,https://cdn.metatft.com/file/metatft/traits/shadowisles.png,2; 3; 4; 5,"Whenever ANY champion dies, gain Souls (). Shadow Isles champions' Abilities are uniquely empowered based on the number of Souls you have.
+
+Shadow Isles champions gain Attack Damage and Ability Power.
+
+
+(2) 1x , 18% 
+
+(3) 1.3x , 20% 
+
+(4) 1.6x , 22% 
+
+(5) 1.9x , 25% 
+
+Souls Collected: X",Viego; Yorick; Gwen; Kalista; Thresh
+Shurima,https://cdn.metatft.com/file/metatft/traits/shurima.png,2; 3; 4,"Each second, Shurimans gain 2% Attack Speed and restore 20 Health. At combat start, they gain additional effects.
+
+
+(2) 20% max Health
+
+(3) 50 Armor and Magic Resist
+
+(4) A Shuriman ascends to GODHOOD every 3 seconds.",Nasus; Renekton; Azir; Xerath
+Slayer,https://cdn.metatft.com/file/metatft/traits/slayer.png,2; 4; 6,"Slayers gain Omnivamp and Attack Damage. They increase the bonus Attack Damage by up to 50% based on their missing Health.
+(2) 22% , 10% (4) 33% , 16% (6) 44% , 20%",Briar; Qiyana; Tryndamere; Yasuo; Gangplank; Bel'Veth; Yone; Aatrox
+Soulbound,https://cdn.metatft.com/file/metatft/traits/soulbound.png,1,"Lucian and Senna fight together, swapping when either casts. Each champion has a unique ability.
+
+Your strongest Soulbound pair grants bonuses to your team. While Senna is out, all allies gain 7% Damage Reduction. While Lucian is out, all allies gain 7% Damage Amp.",Lucian & Senna
+Star Forger,https://cdn.metatft.com/file/metatft/traits/starforger.png,1,"Aurelion Sol gains 20/60/100% increased Stardust for each other unique Targonian fielded in combat.
+
+Current Bonus: X",Aurelion Sol
+Targon,https://cdn.metatft.com/file/metatft/traits/targon.png,1,"Targonians are forged by the stars. They are traitless, but stronger than the average champion.",Aphelios; Leona; Zoe; Diana; Taric; Aurelion Sol
+The Boss,https://cdn.metatft.com/file/metatft/traits/theboss.png,1,"When Sett first drops below 45% max Health, he leaves combat to start doing sit-ups. Each sit-up restores 15% max Health and gives him 60% Attack and Move Speed.
+
+If he reaches full Health, he returns to combat Pumped Up, converting all damage from his attacks and Ability to true damage. If all of his allies die, he immediately returns to combat.",Sett
+Timewinders,https://cdn.metatft.com/file/metatft/traits/timewinders.png,1; 2,"(1) Every 2 casts, Ekko stores 1 XP for the Chronokeeper trait.
+
+(2) AND enemies within Ekko's Parallel Convergence zone take damage from Zilean's Time Bombs 200% faster.
+
+Total Chronokeeper Stored XP: X",
+Vanquisher,https://cdn.metatft.com/file/metatft/traits/vanquisher.png,2; 3; 4; 5,"Vanquishers' abilities can critically strike. They also gain Critical Strike Chance and Critical Strike Damage.
+(2) 15%  , 15% (3) 20%  , 20% (4) 25%  , 25% (5) 30%  , 30%",Rek'Sai; Gangplank; Ambessa; Kalista; Fiddlesticks
+Void,https://cdn.metatft.com/file/metatft/traits/void.png,2; 4; 6; 9,"Gain Mutations that only Void champions can use. Void champions gain Attack Speed.
+
+
+(2) 1 Mutation, 8% 
+
+(4) 2 Mutations, 18% 
+
+(6) 3 Mutations, 33% 
+
+(9) Mutations become supercharged, increasing their power by 100%. 40% 
+
+Champions can only have one Mutation at a time. Benching a champion removes their Mutation.",Kog'Maw; Cho'Gath; Rek'Sai; Malzahar; Bel'Veth; Kai'Sa; Rift Herald; Baron Nashor
+Warden,https://cdn.metatft.com/file/metatft/traits/warden.png,2; 3; 4; 5,"When Wardens first drop below 75% and 25% Health, they gain a Shield based on their max Health.
+(2) 16% (3) 20% (4) 26% (5) 33%",Xin Zhao; Yorick; Loris; Nautilus; Braum; Ornn; Thresh
+World Ender,https://cdn.metatft.com/file/metatft/traits/worldender.png,1,"Aatrox gains Attack Damage equal to his Omnivamp.
+
+On first death, he becomes briefly untargetable and heals back to full Health over 2 seconds. Afterwards, he reduces his maximum Mana by 20 and gains 20% Durability.",Aatrox
+Yordle,https://cdn.metatft.com/file/metatft/traits/yordle.png,2; 4; 6; 8; 10,"(2) Yordles gain 40 Health and 5% Attack Speed for each unique Yordle fielded. 3 star Yordles grant 50% more!
+
+(4) AND your first shop each round has a Yordle in it!
+
+(6) AND get 2 free rerolls each round!
+
+(8) AND get a Yordle Grab Bag each round!",Lulu; Rumble; Poppy; Teemo; Tristana; Kennen; Kobuko & Yuumi; Fizz; Veigar; Ziggs
+Zaun,https://cdn.metatft.com/file/metatft/traits/zaun.png,3; 5; 7,"After 4 seconds, Zaunites become Shimmer-Fused, granting them 10% Durability and 90% decaying Attack Speed for 4 seconds.
+
+After a short cooldown, they become Shimmer-Fused again.
+
+
+(3) Refresh after 4 seconds.
+
+(5) At 60% Health, Zaunites restore 25% Health over 3 seconds and instantly become Shimmer-Fused.
+
+(7) Shimmer-Fused bonuses are increased by 50%. Refresh after 3 seconds instead.",Blitzcrank; Ekko; Vi; Dr. Mundo; Jinx; Singed; Warwick; Ziggs

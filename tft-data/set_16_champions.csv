@@ -1,0 +1,102 @@
+name,url,cost,metaCost,traits,shorthand
+Anivia,https://tftactics.gg/champions/anivia/,1,1,Freljord; Invoker,ANI
+Blitzcrank,https://tftactics.gg/champions/blitzcrank/,1,1,Zaun; Juggernaut,BLI
+Briar,https://tftactics.gg/champions/briar/,1,1,Noxus; Slayer; Juggernaut,BRI
+Caitlyn,https://tftactics.gg/champions/caitlyn/,1,1,Piltover; Longshot,CAI
+Illaoi,https://tftactics.gg/champions/illaoi/,1,1,Bilgewater; Bruiser,ILL
+Jarvan IV,https://tftactics.gg/champions/jarvan_iv/,1,1,Demacia; Defender,JI
+Jhin,https://tftactics.gg/champions/jhin/,1,1,Ionia; Gunslinger,JHI
+Kogmaw,https://tftactics.gg/champions/kogmaw/,1,1,Void; Arcanist; Longshot,KOG
+Lulu,https://tftactics.gg/champions/lulu/,1,1,Yordle; Arcanist,LUL
+Qiyana,https://tftactics.gg/champions/qiyana/,1,1,Ixtal; Slayer,QIY
+Rumble,https://tftactics.gg/champions/rumble/,1,1,Yordle; Defender,RUM
+Shen,https://tftactics.gg/champions/shen/,1,1,Ionia; Bruiser,SHE
+Sona,https://tftactics.gg/champions/sona/,1,1,Demacia; Invoker,SON
+Viego,https://tftactics.gg/champions/viego/,1,1,Shadow Isles; Quickstriker,VIE
+Aphelios,https://tftactics.gg/champions/aphelios/,2,2,Targon,APH
+Ashe,https://tftactics.gg/champions/ashe/,2,2,Freljord; Quickstriker,ASH
+Bard,https://tftactics.gg/champions/bard/,2,2,Caretaker,BAR
+Chogath,https://tftactics.gg/champions/chogath/,2,2,Void; Juggernaut,CHO
+Ekko,https://tftactics.gg/champions/ekko/,2,2,Zaun; Disruptor,EKK
+Graves,https://tftactics.gg/champions/graves/,2,2,Bilgewater; Gunslinger,GRA
+Neeko,https://tftactics.gg/champions/neeko/,2,2,Ixtal; Arcanist; Defender,NEE
+Orianna,https://tftactics.gg/champions/orianna/,2,2,Piltover; Invoker,ORI
+Poppy,https://tftactics.gg/champions/poppy/,2,2,Demacia; Yordle; Juggernaut,POP
+RekSai,https://tftactics.gg/champions/reksai/,2,2,Void; Vanquisher,REK
+Sion,https://tftactics.gg/champions/sion/,2,2,Noxus; Bruiser,SIO
+Teemo,https://tftactics.gg/champions/teemo/,2,2,Yordle; Longshot,TEE
+Tristana,https://tftactics.gg/champions/tristana/,2,2,Yordle; Gunslinger,TRI
+Tryndamere,https://tftactics.gg/champions/tryndamere/,2,2,Freljord; Slayer,TRY
+Twisted Fate,https://tftactics.gg/champions/twisted_fate/,2,2,Bilgewater; Quickstriker,TF
+Vi,https://tftactics.gg/champions/vi/,2,2,Piltover; Zaun; Defender,VI
+Xin Zhao,https://tftactics.gg/champions/xin_zhao/,2,2,Demacia; Ionia; Warden,XZ
+Yasuo,https://tftactics.gg/champions/yasuo/,2,2,Ionia; Slayer,YAS
+Yorick,https://tftactics.gg/champions/yorick/,2,2,Shadow Isles; Warden,YOR
+Ahri,https://tftactics.gg/champions/ahri/,3,3,Ionia; Arcanist,AHR
+Darius,https://tftactics.gg/champions/darius/,3,3,Noxus; Defender,DAR
+Dr Mundo,https://tftactics.gg/champions/dr_mundo/,3,3,Zaun; Bruiser,DM
+Draven,https://tftactics.gg/champions/draven/,3,3,Noxus; Quickstriker,DRA
+Gangplank,https://tftactics.gg/champions/gangplank/,3,3,Bilgewater; Slayer; Vanquisher,GAN
+Gwen,https://tftactics.gg/champions/gwen/,3,3,Shadow Isles; Disruptor,GWE
+Jinx,https://tftactics.gg/champions/jinx/,3,3,Zaun; Gunslinger,JIN
+Kennen,https://tftactics.gg/champions/kennen/,3,3,Ionia; Yordle; Defender,KEN
+Kobuko & Yuumi,https://tftactics.gg/champions/kobuko_&_yuumi/,3,3,Yordle; Bruiser; Invoker,KOYU
+Leblanc,https://tftactics.gg/champions/leblanc/,3,3,Noxus; Invoker,LEB
+Leona,https://tftactics.gg/champions/leona/,3,3,Targon,LEO
+Loris,https://tftactics.gg/champions/loris/,3,3,Piltover; Warden,LOR
+Malzahar,https://tftactics.gg/champions/malzahar/,3,3,Void; Disruptor,MAL
+Milio,https://tftactics.gg/champions/milio/,3,3,Ixtal; Invoker,MIL
+Nautilus,https://tftactics.gg/champions/nautilus/,3,3,Bilgewater; Juggernaut; Warden,NAU
+Sejuani,https://tftactics.gg/champions/sejuani/,3,3,Freljord; Defender,SEJ
+Vayne,https://tftactics.gg/champions/vayne/,3,3,Demacia; Longshot,VAY
+Zoe,https://tftactics.gg/champions/zoe/,3,3,Targon,ZOE
+Ambessa,https://tftactics.gg/champions/ambessa/,4,4,Noxus; Vanquisher,AMB
+Belveth,https://tftactics.gg/champions/belveth/,4,4,Void; Slayer,BEL
+Braum,https://tftactics.gg/champions/braum/,4,4,Freljord; Warden,BRA
+Diana,https://tftactics.gg/champions/diana/,4,4,Targon,DIA
+Fizz,https://tftactics.gg/champions/fizz/,4,4,Bilgewater; Yordle,FIZ
+Garen,https://tftactics.gg/champions/garen/,4,4,Demacia; Defender,GAR
+Kaisa,https://tftactics.gg/champions/kaisa/,4,4,Assimilator; Void; Longshot,KAI
+Kalista,https://tftactics.gg/champions/kalista/,4,4,Shadow Isles; Vanquisher,KAL
+Lissandra,https://tftactics.gg/champions/lissandra/,4,4,Freljord; Invoker,LIS
+Lux,https://tftactics.gg/champions/lux/,4,4,Demacia; Arcanist,LUX
+Miss Fortune,https://tftactics.gg/champions/miss_fortune/,4,4,Bilgewater; Gunslinger,MF
+Nasus,https://tftactics.gg/champions/nasus/,4,4,Shurima,NAS
+Nidalee,https://tftactics.gg/champions/nidalee/,4,4,Ixtal; Huntress,NID
+Renekton,https://tftactics.gg/champions/renekton/,4,4,Shurima,REN
+Rift Herald,https://tftactics.gg/champions/rift_herald/,4,4,Void; Bruiser,RH
+Seraphine,https://tftactics.gg/champions/seraphine/,4,4,Piltover; Disruptor,SER
+Singed,https://tftactics.gg/champions/singed/,4,4,Zaun; Juggernaut,SIN
+Skarner,https://tftactics.gg/champions/skarner/,4,4,Ixtal,SKA
+Swain,https://tftactics.gg/champions/swain/,4,4,Noxus; Arcanist; Juggernaut,SWA
+Taric,https://tftactics.gg/champions/taric/,4,4,Targon,TAR
+Veigar,https://tftactics.gg/champions/veigar/,4,4,Yordle; Arcanist,VEI
+Warwick,https://tftactics.gg/champions/warwick/,4,4,Zaun; Quickstriker,WAR
+Wukong,https://tftactics.gg/champions/wukong/,4,4,Ionia; Bruiser,WUK
+Yone,https://tftactics.gg/champions/yone/,4,4,Ionia; Slayer,YON
+Yunara,https://tftactics.gg/champions/yunara/,4,4,Ionia; Quickstriker,YUN
+Aatrox,https://tftactics.gg/champions/aatrox/,5,5,Darkin; World Ender; Slayer,AAT
+Annie,https://tftactics.gg/champions/annie/,5,5,Dark Child; Arcanist,ANN
+Azir,https://tftactics.gg/champions/azir/,5,5,Shurima; Emperor; Disruptor,AZI
+Fiddlesticks,https://tftactics.gg/champions/fiddlesticks/,5,5,Harvester; Vanquisher,FID
+Galio,https://tftactics.gg/champions/galio/,5,5,Demacia; Heroic,GAL
+Kindred,https://tftactics.gg/champions/kindred/,5,5,Eternal; Quickstriker,KIN
+Lucian & Senna,https://tftactics.gg/champions/lucian_&_senna/,5,5,Soulbound; Gunslinger,LUSE
+Mel,https://tftactics.gg/champions/mel/,5,5,Noxus; Disruptor,MEL
+Ornn,https://tftactics.gg/champions/ornn/,5,5,Blacksmith; Warden,ORN
+Sett,https://tftactics.gg/champions/sett/,5,5,Ionia; The Boss,SET
+Shyvana,https://tftactics.gg/champions/shyvana/,5,5,Dragonborn; Juggernaut,SHY
+T-Hex,https://tftactics.gg/champions/t-hex/,5,5,HexMech; Piltover; Gunslinger,THE
+Tahm Kench,https://tftactics.gg/champions/tahm_kench/,5,5,Bilgewater; Glutton; Bruiser,TK
+Thresh,https://tftactics.gg/champions/thresh/,5,5,Shadow Isles; Warden,THR
+Tibbers,https://tftactics.gg/champions/tibbers/,5,,,TIB
+Volibear,https://tftactics.gg/champions/volibear/,5,5,Freljord; Bruiser,VOL
+Xerath,https://tftactics.gg/champions/xerath/,5,5,Shurima; Ascendant,XER
+Ziggs,https://tftactics.gg/champions/ziggs/,5,5,Zaun; Yordle; Longshot,ZIG
+Zilean,https://tftactics.gg/champions/zilean/,5,5,Chronokeeper; Invoker,ZIL
+Aurelion Sol,https://tftactics.gg/champions/aurelion_sol/,7,7,Star Forger; Targon,AS
+Baron Nashor,https://tftactics.gg/champions/baron_nashor/,7,7,Void; Riftscourge,BN
+Brock,https://tftactics.gg/champions/brock/,7,7,Ixtal,BRO
+Ryze,https://tftactics.gg/champions/ryze/,7,7,Rune Mage,RYZ
+Sylas,https://tftactics.gg/champions/sylas/,7,7,Chainbreaker; Arcanist; Defender,SYL
+Zaahen,https://tftactics.gg/champions/zaahen/,7,7,Darkin; Immortal,ZAA

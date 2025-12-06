@@ -1,0 +1,421 @@
+name,icon,tags,description,shorthand
+3 Threes,https://cdn.metatft.com/file/metatft/augments/threethrees_ii.png,4-2,Gain 3 random 2-star 3-cost champions and 8 gold.,THR
+A Magic Roll,https://cdn.metatft.com/file/metatft/augments/a-magical-roll-ii.png,3-2,"Roll 3 dice. Gain rewards based on their total.
+
+Reward: X",MR
+Advanced Loan,https://cdn.metatft.com/file/metatft/augments/advancedloan_ii.png,2-1,Gain 20 Gold. Your next augment is one tier lower.,AL
+Advanced Loan+,https://cdn.metatft.com/file/metatft/augments/advancedloan_ii.png,3-2,Gain 33 Gold. Your next augment is one tier lower.,AL1
+Air Axiom,https://cdn.metatft.com/file/metatft/augments/airaxiom_i.png,2-1; 3-2; 4-2,Gain an Air Hex. Champions within gain 25% Attack Speed and their damage 30% Sunders enemies for 5 seconds.,AA
+Arcane Viktor-y,https://cdn.metatft.com/file/metatft/augments/arcaneviktory_ii.png,3-2; 4-2,"After 8 seconds of combat, stun the enemy team for 1.5 seconds. Repeat this after 20 seconds of combat.
+
+TFT Macao Open, 2024",AV
+Artillery Barrage,https://cdn.metatft.com/file/metatft/augments/artillerybarrage_i.png,2-1,"Gain a Rumble. Your strongest Rumble gains +7 Range and constantly fires missiles at enemies, increased with Attack Speed.",AB
+Ascension,https://cdn.metatft.com/file/metatft/augments/ascension2.png,3-2; 4-2,"After 15 seconds of combat, gain 60% Damage Amp.",ASC
+Augmented Power,https://cdn.metatft.com/file/metatft/augments/powerup_i.png,2-1; 3-2,Your next augment is one tier higher.,AP
+Aura Farming,https://cdn.metatft.com/file/metatft/augments/aurafarming_ii.png,2-1,Gain a 2-star 5-cost champion. You cannot field it until 4-3.,AF
+Backup Bows,https://cdn.metatft.com/file/metatft/augments/recurvewrecker_i.png,2-1,"Gain a Recurve Bow. After your team attacks 1000 times, gain 2 more.
+
+Attacks: X",BB
+Band of Thieves,https://cdn.metatft.com/file/metatft/augments/bandthieves1.png,2-1; 3-2; 4-2,Gain 1 Thief's Gloves.,BOT
+Band of Thieves II,https://cdn.metatft.com/file/metatft/augments/bandthieves3.png,2-1,"Gain 2 Thief's Gloves. After 8 player combats, gain another.",BOT1
+Band of Thieves II+,https://cdn.metatft.com/file/metatft/augments/bandthieves3.png,3-2,"Gain 2 Thief's Gloves. After 6 player combats, gain another.",BOT2
+Band of Thieves II++,https://cdn.metatft.com/file/metatft/augments/bandthieves3.png,4-2,"Gain 2 Thief's Gloves. After 3 player combats, gain another.",BOT3
+Bandle Bounty I,https://cdn.metatft.com/file/metatft/augments/bandlebounty_ii.png,3-2,"For every Yordle you've unlocked or unlock, gain 3 gold. The Bandle Paths reveal a secret Yordle 10. Gain a Rumble and Lulu.",BB1
+Bandle Bounty II,https://cdn.metatft.com/file/metatft/augments/bandlebountyplus_ii.png,3-2,"For every Yordle you've unlocked or unlock, gain 5 gold. The Bandle Paths reveal a secret Yordle 10! Gain a Tristana and Teemo.",BB2
+Belt Overflow,https://cdn.metatft.com/file/metatft/augments/beltoverflow_iii.png,3-2; 4-2,Gain 4 Giant's Belts. Your Giant's Belts grant +75 bonus Health.,BO
+Best Friends I,https://cdn.metatft.com/file/metatft/augments/best-friends-i.png,3-2; 4-2,Allies isolated in pairs gain 10% Attack Speed and 10 Armor at the start of combat.,BF
+Best Friends II,https://cdn.metatft.com/file/metatft/augments/best-friends-ii.png,3-2; 4-2,Allies isolated in pairs gain 15% Attack Speed and 18 Armor at the start of combat.,BF1
+Big Friend I,https://cdn.metatft.com/file/metatft/augments/big-friend-i.png,3-2; 4-2,Allies that start combat next to an ally with over 1750 Health gain 9% Durability.,BF2
+Big Grab Bag,https://cdn.metatft.com/file/metatft/augments/grab-bag-ii.png,3-2; 4-2,"Gain 3 random components, 2 gold, and 1 Reforger.
+
+Reforgers allow you to remake any item.",BGB
+Binary Airdrop,https://cdn.metatft.com/file/metatft/augments/binaryairdrop3.png,3-2; 4-2,Combat start: Champions holding 2 items gain a random 3rd completed item. Gain 2 random component now.,BA
+Birthday Present,https://cdn.metatft.com/file/metatft/augments/golden-gifts-iii.png,2-1,Gain a 2-star champion and 1 gold every time you level up. The champion's cost tier is your level minus 4 (max: 5-cost).,BP
+Birthday Reunion,https://cdn.metatft.com/file/metatft/augments/birthdayreunion_ii.png,2-1,"Gain a random 2-star 2-cost champion. When you reach Level 6, gain a Thief's Gloves. When you reach Level 9, gain a random 2-star 5-cost champion.
+
+Inkborn Fables Tactician's Crown, 2024",BR
+Blood Offering,https://cdn.metatft.com/file/metatft/augments/trailofblood_ii.png,2-1; 3-2,Gain a Bloodthirster. Combat start: Allies holding Bloodthirsters lose 20% Health but gain a 30% Health shield and 10% Attack Damage.,BO1
+Bodyguard Training,https://cdn.metatft.com/file/metatft/augments/bodyguardstraining_ii.png,2-1,"Allies gain 10 Armor and Magic Resist, increased by 3 per player level.
+
+Gizmos & Gadgets Championship, 2022",BT
+Boxing Lessons,https://cdn.metatft.com/file/metatft/augments/boxinglessons_i.png,3-2; 4-2,Your team gains 30 Health for each ally that starts combat in the front row.,BL
+Branching Out,https://cdn.metatft.com/file/metatft/augments/branching-out-i.png,2-1,Gain a random Emblem.,BO2
+Branching Out+,https://cdn.metatft.com/file/metatft/augments/branching-out-i.png,3-2,"Gain a random Emblem and a Reforger.
+
+Reforgers allow you to remake any item.",BO3
+Bringer of Ruin,https://cdn.metatft.com/file/metatft/augments/bringerofruin_ii.png,2-1,"Every takedown Atakhan scores permanently grants him 2% Ability Power and 30 max Health. Gain a Briar and a Sion.
+(Current Takedowns: X)",BOR
+Bronze For Life I,https://cdn.metatft.com/file/metatft/augments/bronzeforlife_ii.png,3-2; 4-2,"Your team gains 2.5% Damage Amp for each Bronze-tier trait.
+
+Damage Amp Bonus: X",BFL
+Bronze For Life II,https://cdn.metatft.com/file/metatft/augments/bronzeforlife_iii.png,3-2; 4-2,"Your team gains 2.5% Damage Amp and 2% Durability for each Bronze-tier trait.
+
+Damage Amp Bonus: X
+Durability Bonus: X",BFL1
+Buried Treasures,https://cdn.metatft.com/file/metatft/augments/buried-treasures-iii.png,2-1,Gain a random item component now and at the start of the next 5 rounds.,BT1
+Calculated Loss,https://cdn.metatft.com/file/metatft/augments/calculatedloss2.png,2-1,"After losing your combat, gain 2 gold and a free Shop reroll.",CL
+Call to Chaos,https://cdn.metatft.com/file/metatft/augments/calltochaos_iii.png,4-2,"Gain a powerful and random reward.
+
+Reward: X",CTC
+Called Shot,https://cdn.metatft.com/file/metatft/augments/calledshot_i.png,2-1,Set your win streak to 4. Gain 4 gold.,CS
+Care Package,https://cdn.metatft.com/file/metatft/augments/carepackage_ii.png,3-2,"Now and at the start of the next 2 Stages, receive a care package with loot and 3 gold.",CP
+Caretaker's Ally,https://cdn.metatft.com/file/metatft/augments/caretaker_s-chosen-i.png,2-1,"Gain a random 2-cost champion now. Gain the same one again every time you level up.
+
+Champion: X",CA
+Caretaker's Favor,https://cdn.metatft.com/file/metatft/augments/caretaker_s-chosen-ii.png,2-1,"Gain a component anvil when you reach level 5, 6, 7, and 8.
+
+The anvil offers 4 choices.",CF
+Carve a Path,https://cdn.metatft.com/file/metatft/augments/carveapath_i.png,2-1,"Gain a B.F. Sword. After your team deals 65000 physical damage, gain 2 more.
+
+Damage dealt: X",CP1
+Celestial Blessing I,https://cdn.metatft.com/file/metatft/augments/celestialblessing1.png,3-2; 4-2,Your team gains 12% Omnivamp. Excess healing is converted to a shield up to 200 Health.,CB
+Celestial Blessing II,https://cdn.metatft.com/file/metatft/augments/celestialblessing2.png,3-2; 4-2,Your team gains 18% Omnivamp. Excess healing is converted to a shield up to 400 Health.,CB1
+Celestial Blessing III,https://cdn.metatft.com/file/metatft/augments/celestialblessing3.png,3-2; 4-2,Your team gains 25% Omnivamp. Excess healing is converted to a shield up to 1000 Health.,CB2
+Chaos Magic,https://cdn.metatft.com/file/metatft/augments/chaosmagic_ii.png,3-2; 4-2,"Arcanists gain 1 Mana Regen. After every 150 Mana they spend, a magical effect hits the board. Gain a Lulu and a Kog'Maw.",CM
+Chaotic Evolution,https://cdn.metatft.com/file/metatft/augments/chaosevolution_i.png,2-1,"Starring up a champion grants them one of the following: 100 Health, 6% Durability, 10% Ability Power, 10% Attack Damage, 10% Attack Speed. Bonuses stack.",CE
+Chosen Wolves,https://cdn.metatft.com/file/metatft/augments/chosenwolves_iii.png,4-2,"Gain an Ambessa and a Kindred. When Kindred casts, Ambessa always gains their protection against death and gains Attack Damage while protected. When Ambessa casts, Wolf strikes all enemies hit, dealing reduced damage.",CW
+Clear Mind,https://cdn.metatft.com/file/metatft/augments/clearmind2.png,2-1,"If there are no champions on your bench at the end of player combat, gain 3 XP.",CM1
+Clockwork Accelerator,https://cdn.metatft.com/file/metatft/augments/clockworkaccelerator_ii.png,3-2; 4-2,Your team gains 10% Attack Speed every 3 seconds in combat.,CA1
+Cluttered Mind,https://cdn.metatft.com/file/metatft/augments/dizzy-ii.png,2-1,"Gain 4 random 1-cost champions now. If your bench is full at the end of player combat, gain 3 XP.",CM2
+Comeback Story,https://cdn.metatft.com/file/metatft/augments/comebackstory_iii.png,2-1,"Your team gains 4 Health and 0.4% Attack Speed per missing player Health.
+
+X",CS1
+Commerce Core,https://cdn.metatft.com/file/metatft/augments/trade3.png,4-2,Gain 10 free Shop rerolls now and 4 every round for the rest of the game.,CC
+Component Buffet,https://cdn.metatft.com/file/metatft/augments/the-customer-is-always-right-i.png,2-1,"Whenever you would get a component, gain a component anvil instead. Gain a random component now.
+
+The anvil offers 4 choices.",CB3
+Component Heist,https://cdn.metatft.com/file/metatft/augments/museumheist_iii.png,4-2,"After 5 player combats, gain 1 of every item component.",CH
+Construct a Companion,https://cdn.metatft.com/file/metatft/augments/constructacompanion_iii.png,3-2,The next 1-cost champion you buy is 3 star. Gain 2 gold.,CC1
+Continuous Conjuration,https://cdn.metatft.com/file/metatft/augments/hyperbolicrodextender_i.png,2-1,"Gain a Needlessly Large Rod. After your team deals 38000 magic damage, gain 2 more.
+
+Damage dealt: X",CC2
+Cooking Pot,https://cdn.metatft.com/file/metatft/augments/cookingpot_ii.png,2-1,"At the start of each turn, all allies holding a Frying Pan or Spatula item grant the nearest champion 40 permanent Health. Gain a Frying Pan.",CP2
+Coronation,https://cdn.metatft.com/file/metatft/augments/coronation_iii.png,3-2; 4-2,"Gain a Tactician's Crown. Tactician's Crown, Shield, and Cape grant the holder an additional 20% Attack Speed, 25% Attack Damage, and 30% Ability Power.",COR
+Corrosion,https://cdn.metatft.com/file/metatft/augments/corrosion_i.png,3-2; 4-2,Enemy champions in the first two rows lose 4 Armor and Magic Resist every 2 seconds.,COR1
+Crafted Crafting,https://cdn.metatft.com/file/metatft/augments/craftedcrafting_i.png,2-1,"Whenever you craft a completed item, gain 2 rerolls.",CC3
+Crash Test Dummies,https://cdn.metatft.com/file/metatft/augments/crash-test-dummies-ii.png,3-2; 4-2,Gain 2 Training Dummies. Combat start: Your Training Dummies launch themselves towards a group of enemies and Stun them for 1.3 seconds.,CTD
+Critical Success,https://cdn.metatft.com/file/metatft/augments/criticalsuccess_i.png,2-1,"Gain a Sparring Glove. After your team's attacks critically strike 320 times, gain 2 more.
+
+Critical strikes: X",CS2
+Crown's Will,https://cdn.metatft.com/file/metatft/augments/will-of-the-crown-ii.png,2-1; 3-2; 4-2,Gain a Needlessly Large Rod. Your team gains 10 Ability Power and 8 Armor.,CW1
+Cruel Pact,https://cdn.metatft.com/file/metatft/augments/sacrificial-pact-iii.png,2-1,Buying XP costs 5 player health instead of 4 gold. Heal 3 player health before each player combat. Gain 6 now.,CP3
+Cry Me A River,https://cdn.metatft.com/file/metatft/augments/crymeariver_ii.png,2-1; 3-2,"Gain a Tear of the Goddess. Your team gains 1 Mana Regen. After 10 seconds in combat, increase this to 2.",CMR
+Cursed Crown,https://cdn.metatft.com/file/metatft/augments/cursedcrown-iii.png,2-1; 3-2,"Gain +2 max team size and your team gains 4% Durability, but you take double player damage when you lose a player combat.",CC4
+Darkwill's Invasion,https://cdn.metatft.com/file/metatft/augments/noxianinvasion_ii.png,3-2; 4-2,"Your team gains 10% Damage Amp, increased to 15% if the Noxus trait is active.",DI
+Deadlier Blades,https://cdn.metatft.com/file/metatft/augments/deadlierblades_ii.png,2-1,Gain a Deathblade. Deathblades permanently gain 1% Attack Damage whenever their holders score a takedown.,DB
+Deadlier Caps,https://cdn.metatft.com/file/metatft/augments/deadliercaps_ii.png,2-1,Gain a Rabadon's Deathcap. Rabadon's Deathcaps permanently gain 1% Ability Power whenever their holders score a takedown.,DC
+Defense of the Placidium,https://cdn.metatft.com/file/metatft/augments/defenseofionia_ii.png,3-2; 4-2,"Your team gains 8% Durability, increased to 12% if the Ionia trait is active.",DOT
+Delayed Start,https://cdn.metatft.com/file/metatft/augments/headstart_i.png,2-1,Sell your board and bench. Gain 4 random 2-star 1-cost champions. Disable your Shop for the next 3 rounds.,DS
+Demacia Forever,https://cdn.metatft.com/file/metatft/augments/demaciaforever_ii.png,2-1,"Demacians gain 7 permanent Health every time they rally. They also gain 1.5% permanent Attack Damage and Ability Power every 3 rallies. Gain a Jarvan IV, a Sona, and a Xin Zhao.",DF
+Double Trouble,https://cdn.metatft.com/file/metatft/augments/double-trouble-ii.png,2-1,"When you field exactly 2 copies of a champion, they both gain 30% Attack Damage and 30% Ability Power, Armor, and Magic Resist. When you 3-star, gain a 2-star copy.",DT
+Dragonguards,https://cdn.metatft.com/file/metatft/augments/uncompromisingwill_iii.png,4-2,"Gain a Shyvana and a 2-star Jarvan IV. When Jarvan casts, Shyvana gains Shield. When Shyvana casts, Jarvan jumps in and deals damage based on his Armor and Magic Resist. After every player combat, gain a Jarvan IV.",DRA
+Dummify,https://cdn.metatft.com/file/metatft/augments/dummify_i.png,3-2,Lose all champions on your board and bench. Gain a Training Dummy with 80% of their combined health. The dummy gains 1200 Health per stage.,DUM
+Duo Queue,https://cdn.metatft.com/file/metatft/augments/duoqueue_ii.png,4-2,Gain 2 random 5-cost champions and 2 copies of a random component.,DQ
+Early Learnings,https://cdn.metatft.com/file/metatft/augments/earlylearning_ii.png,2-1,"Your team gains 8% Attack Damage & Ability Power. This increases by 1% after each player combat. 1-cost champions gain double.
+
+TFT Vegas Open, 2023",EL
+Earth Axiom,https://cdn.metatft.com/file/metatft/augments/earthaxiom_i.png,2-1; 3-2; 4-2,"Gain an Earth Hex. Champions within gain 30 Armor and Magic Resist. At 50% Health, they Stun enemies within 2 hexes for 1.5 seconds.",EA
+Efficient Shopper,https://cdn.metatft.com/file/metatft/augments/efficientshopper_i.png,2-1,"For the next 4 carousels, gain a second copy of the champion taken.",ES
+Epic Rolldown,https://cdn.metatft.com/file/metatft/augments/epicrolldown_ii.png,3-2,"When you reach Level 8, gain 23 Shop rerolls.
+
+Runeterra Reforged Championship, 2023",ER
+Epoch,https://cdn.metatft.com/file/metatft/augments/epoch_ii.png,2-1,"Now, and at the start of every stage, gain 4 XP and 3 free rerolls.",EPO
+Epoch+,https://cdn.metatft.com/file/metatft/augments/epoch_ii.png,3-2,"Now, and at the start of every stage, gain 8 XP and 3 free rerolls.",EPO1
+Evolve and Overcome,https://cdn.metatft.com/file/metatft/augments/evolveandovercome_ii.png,2-1,"For every 5 enemies that Mutated Void allies takedown, gain 2 XP. Gain a Cho'Gath and a 2-star Kog'Maw. (Takedowns: X/5)
+
+Void provides unique Mutations.",EAO
+Exclusive Customization,https://cdn.metatft.com/file/metatft/augments/exclusivecustomization_ii.png,3-2; 4-2,"Gain a Lucky Item Chest and a Magnetic Remover and 10 gold.
+
+Use a Lucky Item Chest on a champion to choose from an armory of recommended items!",EC
+Exiles I,https://cdn.metatft.com/file/metatft/augments/exiles1.png,3-2; 4-2,Your champions that start combat with no adjacent champions gain a 20% max Health shield for 10 seconds.,EXI
+Exiles II,https://cdn.metatft.com/file/metatft/augments/exiles2.png,3-2; 4-2,Your champions that start combat with no adjacent champions gain a 35% max Health shield for 10 seconds.,EXI1
+Expected Unexpectedness,https://cdn.metatft.com/file/metatft/augments/addicted-to-rolling-iii.png,2-1,"Now and at the start of the next 2 stages, roll 3 dice. Gain various rewards based on their total.",EU
+Explosive Growth,https://cdn.metatft.com/file/metatft/augments/explosivegrowth_ii.png,3-2,"Now and at the start of the next 3 rounds, gain 7 XP.",EG
+Explosive Growth+,https://cdn.metatft.com/file/metatft/augments/explosivegrowth_ii.png,4-2,"Now and at the start of the next 3 rounds, gain 10 XP.",EG1
+Extra Buckles,https://cdn.metatft.com/file/metatft/augments/extrabuckles_i.png,2-1,"Gain a Giant's Belt. After your team takes 75000 damage, gain 2 more.
+
+Damage taken: X",EB
+Eye For An Eye,https://cdn.metatft.com/file/metatft/augments/eyeforaneye_i.png,2-1,"For every 15 ally champions that die, gain a random component (max 3).
+
+Deaths Remaining: X",EFA
+Eye For An Eye+,https://cdn.metatft.com/file/metatft/augments/eyeforaneye_i.png,3-2,"Gain a random component. For every 18 ally champions that die, gain another component (max 2).
+
+Deaths Remaining: X",EFA1
+Feed the Flames,https://cdn.metatft.com/file/metatft/augments/feedtheflames_ii.png,2-1; 3-2,Gain a Sunfire Cape. Your team gains 12% Omnivamp when attacking Burning enemies.,FTF
+Find Your Center,https://cdn.metatft.com/file/metatft/augments/findyourcenter_i.png,3-2; 4-2,Your champion that starts combat in the center of the front row gains 15% Damage Amp and 15% max Health.,FYC
+Fire Axiom,https://cdn.metatft.com/file/metatft/augments/fireaxiom_i.png,2-1; 3-2; 4-2,Gain a Fire Hex. Champions within gain 15% Attack Damage and Ability Power. Their damage 1% Burns and 33% Wounds for 6 seconds.,FA
+Firesale,https://cdn.metatft.com/file/metatft/augments/firesale_i.png,3-2,"Each round, steal a random 3-cost or lower champion from the shop. Gain 1 gold.",FIR
+Flexible,https://cdn.metatft.com/file/metatft/augments/flexible_ii.png,2-1,"Gain 1 random Emblem. At the start of every Stage, gain a random Emblem. Your team gains 20 Health for each Emblem they are holding.",FLE
+Flowing Tears,https://cdn.metatft.com/file/metatft/augments/griefofthegreatgoddess_i.png,2-1,"Gain a Tear of the Goddess. After your team spends 6500 Mana, gain 2 more.
+
+Mana spent: X",FT
+Focused Fire,https://cdn.metatft.com/file/metatft/augments/marksman_i.png,3-2; 4-2,"Your team gains 5% Attack Damage. Every 5 seconds, they gain 5% more.",FF
+Forged in Strength,https://cdn.metatft.com/file/metatft/augments/forgedinstrength_iii.png,2-1,"Gain 1 random Artifact. When you drop below 35 Health, gain 3 more random Artifacts.
+
+Remix Rumble Championship, 2023",FIS
+Forward Thinking,https://cdn.metatft.com/file/metatft/augments/forwardthinking_ii.png,3-2,"Lose all your gold. After 5 player combats, gain back the original amount and another 70 gold.
+
+Incoming Gold: X",FT1
+Gain 21 Gold,https://cdn.metatft.com/file/metatft/augments/windfall2.png,3-2,Gain 21 gold.,G2G
+Giant and Mighty,https://cdn.metatft.com/file/metatft/augments/giantandmighty_iii.png,3-2; 4-2,"Your team becomes large, gaining 200 Health and 10% max Health.",GAM
+Glass Cannon I,https://cdn.metatft.com/file/metatft/augments/glasscannon_i.png,3-2; 4-2,Allies that start combat in the back row begin combat at 80% Health but gain 17% Damage Amp.,GC
+Glass Cannon II,https://cdn.metatft.com/file/metatft/augments/glasscannon_ii.png,3-2; 4-2,Allies that start combat in the back row begin combat at 80% Health but gain 30% Damage Amp.,GC1
+Going Long,https://cdn.metatft.com/file/metatft/augments/going-long-iii.png,2-1,"You no longer gain interest. Gain 12 gold now. Round start: gain 5 XP.
+
+Interest is extra gold you gain per 10g saved.",GL
+Gold Destiny,https://cdn.metatft.com/file/metatft/augments/goldendestiny_ii.png,2-1,Gain a random Gold Augment and 3 gold.,GD
+Gold Destiny+,https://cdn.metatft.com/file/metatft/augments/goldendestiny_ii.png,3-2,Gain a random Gold Augment and 6 gold.,GD1
+Golemify,https://cdn.metatft.com/file/metatft/augments/golemify_ii.png,3-2,Lose all champions on your board and bench. Gain a Golem with 60% of their combined Health and 50% of their combined Attack Damage. The Golem gains 1000 Health per stage.,GOL
+Good For Something I,https://cdn.metatft.com/file/metatft/augments/good-for-something-i.png,2-1,Champions that aren't holding items have a 50% chance to drop 1 gold on death.,GFS
+Growth Mindset,https://cdn.metatft.com/file/metatft/augments/growthmindset_iii.png,4-2,Gain 36 XP. Buying XP costs 3 gold instead of 4.,GM
+Hard Bargain,https://cdn.metatft.com/file/metatft/augments/hardbargain_ii.png,2-1,"You cannot choose your Carousel rewards. Gain an additional 6 player Health and 10 Gold each carousel round.
+When you do not pick a Carousel Reward, you are given an unpicked champion and the item it carries",HB
+Hard Commit,https://cdn.metatft.com/file/metatft/augments/hardcommit_iii.png,2-1,"Gain a random Emblem. Now and at the start of each Stage, gain a 1-star champion of that trait with a cost equal to the Stage (max 5) and 2 gold.",HC
+Healing Orbs I,https://cdn.metatft.com/file/metatft/augments/healing-orbs-i.png,3-2; 4-2,"When an enemy dies, the nearest ally is healed for 220.",HO
+Healing Orbs II,https://cdn.metatft.com/file/metatft/augments/healing-orbs-ii.png,3-2; 4-2,"When an enemy dies, the nearest ally is healed for 440.",HO1
+Heart of Steel,https://cdn.metatft.com/file/metatft/augments/healthygains_ii.png,2-1,"Gain a Steadfast Heart. Every 10 seconds of combat its holder survives, Steadfast Heart gains additional 12 permanent max Health.",HOS
+Heavy Is the Crown,https://cdn.metatft.com/file/metatft/augments/heavyisthecrown_ii.png,2-1; 3-2,"Gain a Crown of Demacia, which provides significant bonuses to the wearer. If the holder dies, lose the round.",HIT
+Hedge Fund,https://cdn.metatft.com/file/metatft/augments/richgetricher3.png,2-1,"Gain 25 gold. Your max interest is increased to 10.
+
+Interest is extra gold you gain per 10g saved.",HF
+Hefty Rolls,https://cdn.metatft.com/file/metatft/augments/heftyrolls_ii.png,2-1,"Your team gains 8 Health and size for each time you've rolled this game.
+
+Rolls: X Health: X",HR
+Heroic Grab Bag,https://cdn.metatft.com/file/metatft/augments/heroic-grab-bag-ii.png,2-1,"Gain 2 Lesser Champion Duplicators and 5 gold.
+
+This item allows you to copy a 3-cost or less champion.",HGB
+Heroic Grab Bag+,https://cdn.metatft.com/file/metatft/augments/heroic-grab-bag-ii.png,3-2,"Gain 2 Lesser Champion Duplicators and 8 gold.
+
+This item allows you to copy a 3-cost or less champion.",HGB1
+Heroic Grab Bag++,https://cdn.metatft.com/file/metatft/augments/heroic-grab-bag-ii.png,4-2,"Gain 2 Lesser Champion Duplicators and 14 gold.
+
+This item allows you to copy a 3-cost or less champion.",HGB2
+Hexgate Travel,https://cdn.metatft.com/file/metatft/augments/hexgatetravel_ii.png,3-2,"When the Piltover invention triggers for the first time each combat, gain a random number of Piltover champions that cost between 1 and 3 gold. Gain a Caitlyn and a Vi.",HT
+High Voltage,https://cdn.metatft.com/file/metatft/augments/highvoltage_ii.png,2-1; 3-2,Gain an Ionic Spark. Your Ionic Sparks have +3 hex radius and do 20% more damage.,HV
+Hold the Line,https://cdn.metatft.com/file/metatft/augments/holdtheline_iii.png,3-2; 4-2,Allies in your back 2 rows gain 10% Ability Power and 9% Attack Damage for each ally that starts combat in your front row.,HTL
+Hustler,https://cdn.metatft.com/file/metatft/augments/hyperroll2.png,2-1,"You earn no interest, but gain 2 gold and 2 XP at the start of every player combat round. Gain 3 gold now.
+
+Interest is extra gold you gain per 10g saved.",HUS
+Indecision I,https://cdn.metatft.com/file/metatft/augments/indecisioni_ii.png,3-2,"In 3 rounds, choose a new augment of the same tier. Gain 8 gold now.",IND
+Indecision II,https://cdn.metatft.com/file/metatft/augments/indecisioni_ii.png,3-2,"In 3 rounds, choose a new augment of the same tier. Gain 12 gold now.",IND1
+Indiscriminate Killer,https://cdn.metatft.com/file/metatft/augments/indiscriminateslayer_ii.png,3-2; 4-2,Gain a Giant Slayer. Giant Slayers gain their Damage Amp against all enemies instead of just Tanks.,IK
+Infinity Protection,https://cdn.metatft.com/file/metatft/augments/infinityprotection_ii.png,2-1,"Gain 8 Gold now. On 3-7, gain an Infinity Force. Infinity Force gives allies in the same row a 15% Health shield.
+
+Monsters Attack Championship, 2023",IP
+Invested+,https://cdn.metatft.com/file/metatft/augments/invested-iii.png,3-2,"Gain 26 gold. After every combat, gain 1 Shop reroll for every 10 gold above 50 (max 80 gold).",INV
+Invested++,https://cdn.metatft.com/file/metatft/augments/invested-iii.png,4-2,"Gain 40 gold. After every combat, gain 1 Shop reroll for every 10 gold above 50 (max 80 gold).",INV1
+Iron Assets,https://cdn.metatft.com/file/metatft/augments/iron-assets-i.png,2-1,Gain a component anvil and 3 gold.,IA
+Item Grab Bag,https://cdn.metatft.com/file/metatft/augments/itemgrabbag1.png,2-1; 3-2; 4-2,Gain 1 random completed item.,IGB
+Ixtal Expeditionist,https://cdn.metatft.com/file/metatft/augments/rejuvenating-flames-ii.png,2-1,"Gain a Qiyana, a Neeko, and a Milio. Increase your current and max player Health by 10.",IE
+Jeweled Lotus I,https://cdn.metatft.com/file/metatft/augments/jeweled-lotus-ii.png,3-2; 4-2,"Your team gains 20% Critical Strike Chance, and their Abilities can critically strike.",JL
+Jeweled Lotus II,https://cdn.metatft.com/file/metatft/augments/jeweled-lotus-iii.png,3-2; 4-2,"Your team gains 35% Critical Strike Chance and 10% Critical Strike Damage, and their Abilities can critically strike.",JL1
+Just Hit,https://cdn.metatft.com/file/metatft/augments/justhit_iii.png,4-2,"Gain a Champion Duplicator, 18 Shop rerolls, and 10 gold.",JH
+Kahunahuna,https://cdn.metatft.com/file/metatft/augments/furiousblows_ii.png,2-1; 3-2; 4-2,Every 5th attack deals bonus true damage equal to 200% Basic Attack Damage.,KAH
+Know Your Enemy,https://cdn.metatft.com/file/metatft/augments/know-your-enemy-ii.png,3-2; 4-2,"You can see who you will fight next. Your team gains 10% Damage Amp, increased to 18% if you and your opponent have any of the same traits active.",KYE
+Last Second Save,https://cdn.metatft.com/file/metatft/augments/lastsecondsave_ii.png,3-2; 4-2,"The first time each ally falls below 35% Health, they restore 20% maximum Health.",LSS
+Late Game Scaling,https://cdn.metatft.com/file/metatft/augments/lategamescaling_ii.png,2-1,"Gain 2 XP every round. Your 5-cost champions gain 12% Health and 12% Attack Speed.
+
+CyberCity Tactician's Crown, 2025",LGS
+Late Game Specialist,https://cdn.metatft.com/file/metatft/augments/late-game-specialist-i.png,3-2,"When you reach Level 9, gain 36 gold.",LGS1
+Latent Forge,https://cdn.metatft.com/file/metatft/augments/long-time-crafting-i.png,2-1,"After 8 player combats, gain an Artifact anvil.
+
+The anvil offers 4 choices. Artifacts are more powerful items with a unique effect.",LF
+Leap of Faith,https://cdn.metatft.com/file/metatft/augments/leapoffaith_i.png,2-1,Gain an Illaoi. Your strongest Illaoi becomes a Fighter. Her Ability is replaced with an airborne slam that's recast when she kills her target.,LOF
+Legion of Threes,https://cdn.metatft.com/file/metatft/augments/legionofthrees_ii.png,2-1,"Gain a random Emblem. Your 3-cost champions and all allies equipped with an Emblem gain 200 Health and 12% Attack Speed.
+
+Reckoning Championship, 2021",LOT
+Level Up!,https://cdn.metatft.com/file/metatft/augments/levelup3.png,2-1,"When you buy XP, gain an additional 2. Gain 12 immediately.",LU
+Lifting Competition,https://cdn.metatft.com/file/metatft/augments/liftingcontest_ii.png,2-1,"At the start of each round, if the combined Health of all your unique Bruisers is high enough, gain a reward and increase the threshold (up to four times). Gain an Shen and a Sion.
+
+XX / X",LC
+Lineup,https://cdn.metatft.com/file/metatft/augments/lineup-i.png,3-2; 4-2,Your team gains 2 Armor and Magic Resist for each ally that starts combat in the front two rows.,LIN
+Little Buddies,https://cdn.metatft.com/file/metatft/augments/little-buddies-ii.png,3-2; 4-2,Your 4-cost and 5-cost champions gain 55 Health and 6% Attack Speed for every 1-cost and 2-cost champion on your board.,LB
+Living Forge,https://cdn.metatft.com/file/metatft/augments/living-forge-iii.png,2-1,"Gain an Artifact anvil now and after every 10 player combats.
+
+Artifacts are more powerful items with a unique effect.",LF1
+Lucky Gloves,https://cdn.metatft.com/file/metatft/augments/lucky-gloves-iii.png,2-1,Thief's Gloves will always give your champions ideal items. Gain 2 Sparring Gloves.,LG
+Lucky Gloves+,https://cdn.metatft.com/file/metatft/augments/lucky-gloves-iii.png,3-2; 4-2,"Thief's Gloves will always give your champions ideal items. Gain 2 Sparring Gloves now, then another after 2 player combats.",LG1
+Lunch Money,https://cdn.metatft.com/file/metatft/augments/bloodbank_i.png,2-1; 3-2,"Every 7 damage you deal to enemy tacticians gives you 2 gold.
+Total Payouts: X Gold",LM
+Luxury Subscription,https://cdn.metatft.com/file/metatft/augments/luxurysubscription_iii.png,3-2,"Gain a package containing a 5-cost champion, a 2-star 1-cost champion, and 5 gold.
+
+At the start of the next 2 stages, gain the package again.",LS
+Mace's Will,https://cdn.metatft.com/file/metatft/augments/will-of-the-flail-ii.png,2-1; 3-2; 4-2,Gain a Sparring Gloves. Your team gains 6% Attack Speed and 20% Critical Strike Chance.,MW
+Makeshift Armor I,https://cdn.metatft.com/file/metatft/augments/makeshift1.png,2-1; 3-2; 4-2,Allies without items equipped gain 30 Armor and Magic Resist.,MA
+Makeshift Armor II,https://cdn.metatft.com/file/metatft/augments/makeshift2.png,2-1; 3-2; 4-2,Allies without items equipped gain 45 Armor and Magic Resist.,MA1
+Malicious Monetization,https://cdn.metatft.com/file/metatft/augments/mirroredmonetization_ii.png,4-2,"Gain 2 gold. For the next 3 rounds, enemy champions drop 2 gold when killed.
+
+X",MM
+Max Build,https://cdn.metatft.com/file/metatft/augments/maxbuild_ii.png,4-2,"Gain a Champion Duplicator and 7 free Shop rerolls. On Stage 6-1, gain these again.
+
+Galaxies Championship, 2020",MB
+Mess Hall,https://cdn.metatft.com/file/metatft/augments/foodfighttactics_ii.png,3-2; 4-2,"After 10 seconds of combat, your champions gain 8% Attack Speed and attacks also hurl 2 delicious projectiles that deal 30 () magic damage.",MH
+Min-Max,https://cdn.metatft.com/file/metatft/augments/minmax_iii.png,3-2,"Gain a Golden Item Remover and 4 random components.
+
+Golden Item Remover is a Magnetic Remover with infinite uses.",MM1
+Missed Connections,https://cdn.metatft.com/file/metatft/augments/missed-connections-i.png,3-2; 4-2,Gain a copy of each 1-cost champion.,MC
+Money Monsoon,https://cdn.metatft.com/file/metatft/augments/moneymonsoon_iii.png,4-2,Gain 7 gold now and every round for the rest of the game.,MM2
+NO SCOUT NO PIVOT,https://cdn.metatft.com/file/metatft/augments/noscoutnopivot_ii.png,2-1,"Champions that fight in player combat cannot be benched or sold. Your team gains 1% Health, and 1.5% Attack Damage and Ability Power after player combat.",NSN
+Nine Lives,https://cdn.metatft.com/file/metatft/augments/ninelives_iii.png,2-1,"Set your current and max player Health to 9. On combat loss, you only lose 1 health and gain loot. You can't gain health.",NL
+On a Roll,https://cdn.metatft.com/file/metatft/augments/onaroll_i.png,2-1; 3-2,"Whenever you star up a champion that you fielded last combat, gain 2 free Shop rerolls. Gain 2 gold.",OR
+"One Buff, Two Buff",https://cdn.metatft.com/file/metatft/augments/onebufftwobuff_iii.png,3-2; 4-2,"Gain a Red Buff, a Blue Buff, and a Champion Duplicator.",OBT
+"One, Two, Five!",https://cdn.metatft.com/file/metatft/augments/one-two-five-i.png,4-2,"Gain 1 random component, 2 gold, and 1 random 5-cost champion.",OTF
+Ones Twos Three,https://cdn.metatft.com/file/metatft/augments/threes-company-i.png,2-1,"Gain 1 1-cost champion, 2 2-cost champions, and 1 3-cost champion.",OTT
+Over Encumbered,https://cdn.metatft.com/file/metatft/augments/overencumbered_i.png,2-1,"For the next stage, you only get 2 bench slots. After, get 2 item components.",OE
+Pair of Fours,https://cdn.metatft.com/file/metatft/augments/pairoffours_ii.png,4-2,"If your team has exactly 2 4-cost champions, they each gain 504 Health and 28.4% Attack Speed. Gain a random 4-cost.",POF
+Pandora's Bench,https://cdn.metatft.com/file/metatft/augments/pandoras-bench-ii.png,2-1; 3-2,"At the start of every round, champions on the 3 rightmost bench slots transform into random champions of the same cost. Gain 6 gold.",PB
+Pandora's Items,https://cdn.metatft.com/file/metatft/augments/pandora1.png,2-1; 3-2; 4-2,"Round start: items on your bench are randomized.
+
+Gain 1 random component.",PI
+Pandora's Items II,https://cdn.metatft.com/file/metatft/augments/pandora2.png,2-1; 3-2; 4-2,"Round start: items on your bench are randomized.
+
+Gain 2 random components.",PI1
+Pandora's Items III,https://cdn.metatft.com/file/metatft/augments/pandora3.png,2-1; 3-2,"Round start: items on your bench are randomized.
+
+Gain 1 random Radiant item.",PI2
+Patience is a Virtue,https://cdn.metatft.com/file/metatft/augments/patienceisavirtue_i.png,2-1,"Each round, gain 2 free rerolls if you did not buy a champion last round.",PIV
+Patient Study,https://cdn.metatft.com/file/metatft/augments/learning-from-experience-ii.png,2-1,"After player combat, gain 2 XP if you won or 3 XP if you lost.",PS
+Pilfer,https://cdn.metatft.com/file/metatft/augments/pilfer_ii.png,2-1; 3-2; 4-2,"Each round, gain a 1-star copy of the first champion you killed last combat. The first time you gain 25 gold worth of champions in this way, gain a Thief's Gloves. X
+
+X",PIL
+Placebo,https://cdn.metatft.com/file/metatft/augments/placebo_i.png,2-1,Your team gains 1% Attack Speed. Gain 8 gold.,PLA
+Placebo+,https://cdn.metatft.com/file/metatft/augments/placebo_i.png,3-2,Your team gains 1% Attack Speed. Gain 14 gold.,PLA1
+Plot Armor,https://cdn.metatft.com/file/metatft/augments/plotarmor_ii.png,3-2; 4-2,"Your team gains 8 Armor and Magic Resist. After falling below 50% Health, increase this to 40 for the rest of combat.",PA
+Poison Pals,https://cdn.metatft.com/file/metatft/augments/poisonpals_ii.png,2-1,"Gain a Singed and a 2-star Teemo. Every 4 seconds, Teemo fires a Toxic Dart at Singed's target. When an enemy poisoned by Teemo dies, Singed gains Ability Power for the rest of combat.",PP
+Portable Forge,https://cdn.metatft.com/file/metatft/augments/portableforge2.png,2-1; 3-2; 4-2,"Choose 1 of 4 Artifacts.
+
+Artifacts are more powerful items with a unique effect.",PF
+Precision and Grace,https://cdn.metatft.com/file/metatft/augments/precisiongrace_ii.png,3-2; 4-2,"At the start of combat and on takedown, allies dash to their next target and gain 25% Attack Speed for 3 seconds.",PAG
+Preparation I,https://cdn.metatft.com/file/metatft/augments/preparation-i.png,2-1,"Champions on your bench permanently gain 30 Health, 2% Attack Damage, and 2% Ability Power every round. Champions start with 1 stack of this effect, and can stack up to 4 times.",PRE
+Preparation II,https://cdn.metatft.com/file/metatft/augments/preparation-ii.png,2-1,"Champions on your bench permanently gain 50 Health, 3% Attack Damage, and 3% Ability Power every round. Champions start with 1 stack of this effect, and can stack up to 4 times.",PRE1
+Prismatic Destiny,https://cdn.metatft.com/file/metatft/augments/prismaticdestiny_iii.png,2-1,Gain a random Prismatic Augment and 4 gold.,PD
+Prismatic Destiny+,https://cdn.metatft.com/file/metatft/augments/prismaticdestiny_iii.png,3-2,Gain a random Prismatic Augment and 10 gold.,PD1
+Prismatic Ticket,https://cdn.metatft.com/file/metatft/augments/goldenticket3.png,2-1; 3-2,"Each time your Shop is rerolled, you have a 50% chance to gain a free reroll.",PT
+Prizefighter,https://cdn.metatft.com/file/metatft/augments/prizefighter_ii.png,2-1,Gain 2 item components. Every 5 wins gives you an item component.,PRI
+Promised Protection,https://cdn.metatft.com/file/metatft/augments/promisedprotection_ii.png,2-1; 3-2,Gain a Protector's Vow. Protector's Vow grants its holder 15% additional Mana from all sources.,PP1
+Pyromaniac,https://cdn.metatft.com/file/metatft/augments/pyromaniac_ii.png,2-1; 3-2,Gain a Red Buff. Your Burns deal 50% increased damage.,PYR
+Radiant Rascal,https://cdn.metatft.com/file/metatft/augments/roll-the-dice-iii.png,3-2; 4-2,"Gain a Rascal's Gloves item. This equips 2 random Radiant items every round.
+
+Radiant items are very powerful versions of completed items.",RR
+Radiant Relics,https://cdn.metatft.com/file/metatft/augments/radiantrelic-iii.png,2-1; 3-2; 4-2,"Choose 1 of 5 Radiant items. Gain a Magnetic Remover.
+
+Radiant items are very powerful versions of completed items.",RR1
+Raining Gold,https://cdn.metatft.com/file/metatft/augments/raininggold_ii.png,2-1,Gain 7 gold now and 1 gold every round.,RG
+Recombobulator,https://cdn.metatft.com/file/metatft/augments/recombobulator-i.png,3-2,Champions on your board permanently transform into random champions 1 cost tier higher (max 5). Gain 2 Magnetic Removers.,REC
+ReinFOURcement,https://cdn.metatft.com/file/metatft/augments/reinfourcement_ii.png,4-2,The next 4-cost champion you buy with gold is instantly upgraded to 2-star. Gain 12 gold.,REI
+Replication,https://cdn.metatft.com/file/metatft/augments/replication-ii.png,2-1; 3-2,"Choose 1 of 3 components. For the next 2 rounds, gain a copy of that component.",REP
+Restart Mission,https://cdn.metatft.com/file/metatft/augments/restartmission_i.png,3-2,"Remove all champions on your board and bench. Gain 2 random 2-star 3-costs, 3 2-star 2-costs, and 1 2-star 1-cost champion.",RM
+Retribution,https://cdn.metatft.com/file/metatft/augments/retribution_iii.png,3-2; 4-2,Gain 2 Hands of Justice. Allies equipped with Hand of Justice can critically strike with their Abilities.,RET
+Risky Moves,https://cdn.metatft.com/file/metatft/augments/risky-moves-i.png,2-1,"Your Tactician loses 20 Health, but after 7 player combats, gain 30 gold.",RM1
+Rolling For Days I,https://cdn.metatft.com/file/metatft/augments/rolling-for-days-i.png,3-2; 4-2,Gain 10 free Shop rerolls.,RFD
+Salvage Bin,https://cdn.metatft.com/file/metatft/augments/salvage2.png,2-1,"Gain 1 random completed item now, and 1 component after 8 player combats. Selling champions breaks completed items into components (excluding Tactician's items and Emblems).",SB
+Salvage Bin+,https://cdn.metatft.com/file/metatft/augments/salvage2.png,3-2; 4-2,"Gain 1 random completed item now, and 1 component after 4 player combats. Selling champions breaks completed items into components (excluding Tactician's items and Emblems).",SB1
+Savings Account,https://cdn.metatft.com/file/metatft/augments/savingsaccount_ii.png,2-1,"After you earn 50 gold in interest, gain 30 gold. Your max interest is increased to 7. Gain 4 gold now.
+
+Gold earned: X",SA
+Second Wind,https://cdn.metatft.com/file/metatft/augments/second--wind-i.png,3-2; 4-2,"After 10 seconds of combat, your team heals 40% of their missing Health.",SW
+Secrets of the Sands,https://cdn.metatft.com/file/metatft/augments/secretsofsand_iii.png,2-1,"Gain 6 gold. Gain an Azir on Stage 3-5. Each time you unlock a Shuriman, gain an ideal item for them.",SOT
+Sentinels of Light,https://cdn.metatft.com/file/metatft/augments/sentinelsoflight_ii.png,4-2,"Gain a Lucian & Senna and a 2-star Vayne. Vayne fires additional bolts at enemies afflicted with Black Mist and on takedown, grants Attack Speed to Lucian & Senna.",SOL
+Seraphim's Staff,https://cdn.metatft.com/file/metatft/augments/seraphimsstaff_ii.png,2-1; 3-2,Gain an Archangel's Staff. Archangel's Staff grants 2 additional Mana Regen if its holder has 90% or more Ability Power.,SS
+Shimmerscale Essence,https://cdn.metatft.com/file/metatft/augments/shimmerscaleessence_iii.png,2-1,"Gain a Mogul's Mail. In 5 rounds, gain a Gamblers Blade.
+
+These items give gold as well as combat power.",SE
+Silco's Revenge,https://cdn.metatft.com/file/metatft/augments/silcosrevenge_ii.png,2-1; 3-2; 4-2,"Zaunites explode into Shimmer on death, dealing 45% of their max Health to 2 nearby enemies as magic damage. Gain a Blitzcrank, an Ekko, and a Vi.",SR
+Silver Destiny,https://cdn.metatft.com/file/metatft/augments/silverdestiny_i.png,2-1,Gain a random Silver Augment and 2 gold.,SD
+Silver Destiny+,https://cdn.metatft.com/file/metatft/augments/silverdestiny_i.png,3-2,Gain a random Silver Augment and 4 gold.,SD1
+Silver Spoon,https://cdn.metatft.com/file/metatft/augments/silver-spoon-i.png,2-1,Gain 10 XP.,SS1
+Slammin',https://cdn.metatft.com/file/metatft/augments/slammin_ii.png,2-1,"Gain 1 random component(s). After each player combat, if there are no items on your bench (other than consumables), gain 2 XP.",SLA
+Slammin'+,https://cdn.metatft.com/file/metatft/augments/slammin_ii.png,3-2,"Gain 1 random component(s) and 10 XP now. After each player combat, if there are no items on your bench (other than consumables), gain 2 XP.",SLA1
+Slice of Life,https://cdn.metatft.com/file/metatft/augments/slice_of_life_i.png,2-1,"Twice per stage, gain a random champion. Its cost increases by Stage. This effect ends after receiving 2 5-cost champions.",SOL1
+Slightly Magic Roll,https://cdn.metatft.com/file/metatft/augments/slightlymagicroll_i.png,2-1,"Roll a die. Gain rewards based on the number rolled.
+
+Reward: X",SMR
+Small Grab Bag,https://cdn.metatft.com/file/metatft/augments/smallgrabbag_i.png,3-2; 4-2,Gain 2 random item components.,SGB
+Solo Leveling,https://cdn.metatft.com/file/metatft/augments/sololeveling_ii.png,2-1,"For the next 5 combats, your team size is 1 but the champion you field has massively increased stats. Gain 1 XP for every kill they get. Afterwards, gain 2 item components.",SL
+Solo Plate,https://cdn.metatft.com/file/metatft/augments/soloplate_ii.png,2-1; 3-2,Gain a Gargoyle Stoneplate. Combat start: Allies holding Gargoyle Stoneplate gain 10% max Health if they're the only one in their row.,SP
+Soul Awakening,https://cdn.metatft.com/file/metatft/augments/awakenedsoul_iii.png,3-2; 4-2,"Combat start: Your team gains 2% Attack Damage and Ability Power per second for 10 seconds. At max stacks, deal 15% bonus true damage.",SA1
+Spear's Will,https://cdn.metatft.com/file/metatft/augments/will-of-the-spear-ii.png,2-1; 3-2; 4-2,Your team gains 10% Attack Damage and 5 Mana. Gain a B.F. Sword.,SW1
+Speedy Double Kill,https://cdn.metatft.com/file/metatft/augments/speedydoublekill_ii.png,2-1,"Gain a Guinsoo's Rageblade. When 2 players are eliminated, gain 40 gold.
+
+Fates Championship, 2021",SDK
+Spirit Link,https://cdn.metatft.com/file/metatft/augments/spiritlink_ii.png,3-2; 4-2,Champions restore 5% of their max Health every 4 seconds. Increase the healing by 0.5% for every 10 missing player Health.,SL1
+Spirit of Redemption,https://cdn.metatft.com/file/metatft/augments/spiritofredemption_ii.png,2-1; 3-2,"Gain a Spirit Visage. Every 5 seconds, Spirit Visage heals allies within 1 hex for 10% of their missing Health.",SOR
+Spoils of War I,https://cdn.metatft.com/file/metatft/augments/spoils-of-war-legend-i.png,2-1,Enemies have a 25% chance to drop loot when killed.,SOW
+Spoils of War II,https://cdn.metatft.com/file/metatft/augments/spoils-of-war-legend-ii.png,2-1,Enemies have a 30% chance to drop loot when killed.,SOW1
+Spoils of War III,https://cdn.metatft.com/file/metatft/augments/spoils-of-war-legend-iii.png,2-1,Enemies have a 45% chance to drop loot when killed.,SOW2
+Spreading Roots,https://cdn.metatft.com/file/metatft/augments/spreadingroots_ii.png,2-1,Gain 2 random Emblems and 1 gold.,SR1
+Spreading Roots+,https://cdn.metatft.com/file/metatft/augments/spreadingroots_ii.png,3-2,"Gain 2 random Emblems, a Reforger, and 4 gold.",SR2
+Staffsmith,https://cdn.metatft.com/file/metatft/augments/rodsmith_ii.png,4-2,Gain 2 random completed items that build from Needlessly Large Rod.,STA
+Stand United,https://cdn.metatft.com/file/metatft/augments/standunited1.png,3-2; 4-2,"Gain 1.5% Attack Damage and 1.5% Ability Power for each non-unique Trait active across your team.
+
+Current Bonus: X  X",SU
+Stars Are Born,https://cdn.metatft.com/file/metatft/augments/stars-are-born-ii.png,2-1,The first 1-cost and 2-cost champions you buy are instantly upgraded to 2-star. Gain 7 gold.,SAB
+Starter Kit,https://cdn.metatft.com/file/metatft/augments/starter-kit-iii.png,2-1,"Gain a 4-cost champion, a 2-star 1-cost champion that shares a trait with them, and 8 gold.
+
+At the start of the next 2 stages, gain that 4-cost champion again.",SK
+Survivor,https://cdn.metatft.com/file/metatft/augments/survivor_i.png,2-1,"Gain 4 gold. After 3 players are eliminated, gain 100 more gold.",SUR
+Sweet Treats,https://cdn.metatft.com/file/metatft/augments/sweettreats_iii.png,3-2; 4-2,"Gain an Artifact anvil. Your team gains 25 Health for each item equipped on champions.
+
+Health Gained: X
+
+Magic N' Mayhem Tactician's Crown, 2024",ST
+Sword Overflow,https://cdn.metatft.com/file/metatft/augments/bladeoverflow_iii.png,3-2; 4-2,Gain 4 B.F. Swords. Your B.F. Swords grant +5% Attack Speed.,SO
+Swordsmith,https://cdn.metatft.com/file/metatft/augments/swordsmith_ii.png,4-2,Gain 2 random completed items that build from B.F. Sword.,SWO
+Table Scraps,https://cdn.metatft.com/file/metatft/augments/tablescraps_i.png,2-1,"After the next 2 carousels, gain one champion that was not taken and its item. Gain 1 gold.",TS
+Tactician's Kitchen,https://cdn.metatft.com/file/metatft/augments/tacticianskitchen_iii.png,2-1,"Gain a random Emblem. After 6 rounds, gain a Tactician's Cape.",TK
+Team Building,https://cdn.metatft.com/file/metatft/augments/building-an-army-i.png,2-1; 3-2,"Gain a Lesser Champion Duplicator. Gain another after 5 player combats.
+
+This item allows you to copy a 3-cost or less champion.",TB
+Teaming Up,https://cdn.metatft.com/file/metatft/augments/teaming-up-i.png,3-2; 4-2,Gain 1 random component and 2 random 3-cost champions.,TU
+The Axiomata,https://cdn.metatft.com/file/metatft/augments/theaxiomata_iii.png,2-1,Gain 3 random elemental hex augments. Future augment rounds instead grant you 1 random elemental hex and gold based on the augment's tier.,TA
+The Golden Dragon,https://cdn.metatft.com/file/metatft/augments/thegoldendragon_ii.png,3-2,"Gain a Mogul's Mail. Champions holding Mogul's Mail take up 2 team slots but gain 500 Health and 20% Durability.
+
+Mogul's Mail gives gold as well as combat power.
+Dragonlands Championship, 2022",TGD
+The Golden Egg,https://cdn.metatft.com/file/metatft/augments/the-golden-egg-iii.png,4-2,Gain a golden egg that hatches in 11 turns for a huge amount of loot. Winning player combat speeds up the hatch timer by an extra turn.,TGE
+The Ruined King,https://cdn.metatft.com/file/metatft/augments/ruinedking_ii.png,2-1,"Gain a 2-star Viego. Your strongest Viego shares 30% of his Passive with other Shadow Isles allies. After collecting 100 souls, his Ability upgrades.",TRK
+The Trait Tree,https://cdn.metatft.com/file/metatft/augments/thetraittree_iii.png,2-1,Gain 3 random Emblems and 7 gold.,TTT
+The Trait Tree+,https://cdn.metatft.com/file/metatft/augments/thetraittree_iii.png,3-2,"Gain 3 random Emblems, a Reforger, and 12 gold.",TTT1
+The World Runes,https://cdn.metatft.com/file/metatft/augments/theworldrunes_iii.png,2-1,"Gain 2 Emblems from random Region traits. After 4 player combats with 4 Region traits active, gain a powerful reward. (X/4)",TWR
+Thorn-Plated Armor,https://cdn.metatft.com/file/metatft/augments/thornplatedarmor_ii.png,2-1; 3-2,Gain a Bramble Vest. Your Bramble Vests deal 20-210% more damage (based on Stage).,TPA
+Time UNdilator,https://cdn.metatft.com/file/metatft/augments/baboom_iii.png,2-1; 3-2; 4-2,"Gain a Time Undilator, a dangerous bomb that destroys ALL units in an X-pattern at the start of combat. Also, something is terribly wrong with your shop...",TU1
+Tiniest Titan,https://cdn.metatft.com/file/metatft/augments/tiniest-titaniii.png,3-2,Gain 2 player Health and 2 gold after every player combat. Your Tactician also moves faster. Gain 15 gold now.,TT
+"Tiny, but Deadly",https://cdn.metatft.com/file/metatft/augments/tinybutdeadly_iii.png,3-2; 4-2,"Your team becomes small, gaining 30% Attack Speed and Movement Speed.",TBD
+Titanic Titan,https://cdn.metatft.com/file/metatft/augments/titanictitan_i.png,2-1; 3-2,"Increase your current and max player Health by 25. On carousel rounds you are released earlier, but are much slower.",TT1
+Tons of Stats!,https://cdn.metatft.com/file/metatft/augments/tons-of-stats-ii.png,3-2; 4-2,"Your team gains 44 Health, 4% Attack Damage, 4% Ability Power, 4 Armor, 4 Magic Resist, 4% Attack Speed, and 4 Mana.",TOS
+Trade Sector,https://cdn.metatft.com/file/metatft/augments/trade2.png,2-1,Gain a free Shop reroll every round. Gain 4 gold.,TS1
+Treasure Hunt,https://cdn.metatft.com/file/metatft/augments/treasurehunt_ii.png,2-1,Gain a locked chest each Stage between now and Stage 6. Unlock each chest when you spend 20 gold on Shop rerolls. These chests persist until opened.,TH
+Trials of Twilight,https://cdn.metatft.com/file/metatft/augments/thedarkenglaive_i.png,2-1,"Gain a Xin Zhao. Your strongest Xin Zhao constantly strikes nearby enemies and executes enemies. After 5 player combats as a 3-star, unlock Zaahen. He replaces Xin Zhao and takes his items.",TOT
+Trifecta I,https://cdn.metatft.com/file/metatft/augments/trifecta-ii.png,3-2; 4-2,"Gain 2 3-cost champions.
+Combat Start: 3 random 3-cost champions gain 220 Health and 20% Attack Speed.",TRI
+Trifecta II,https://cdn.metatft.com/file/metatft/augments/trifecta-iii.png,3-2; 4-2,"Gain 3 3-cost champions. Allies gain 5% Attack Speed.
+Combat Start: 3 random 3-cost champions gain 300 Health and 25% Attack Speed.",TRI1
+Twin Guardians,https://cdn.metatft.com/file/metatft/augments/twinguardians_i.png,3-2; 4-2,"If you have exactly 2 allies in your first row, grant them 40 Armor and 40 Magic Resist.",TG
+Two Much Value,https://cdn.metatft.com/file/metatft/augments/twomuchvalue_ii.png,2-1,Gain 1 reroll for every 2 unique 2-cost champions fielded last combat. Gain 2 2-cost champions.,TMV
+Two Trick,https://cdn.metatft.com/file/metatft/augments/two-trick-ii.png,2-1,Gain a random 2-star 2-cost and 2 random 2-star 1-cost champions.,TT2
+U.R.F,https://cdn.metatft.com/file/metatft/augments/ultrarapidfire_ii.png,2-1; 3-2; 4-2,Gain a Spatula. Champions holding Spatula or Frying Pan items gain 15% Attack Speed and 2 Mana Regen.,URF
+Unsealed From Steel,https://cdn.metatft.com/file/metatft/augments/unsealedfromsteel_ii.png,2-1; 3-2; 4-2,Choose 1 of 4 Darkin Weapons. Darkin Weapons are Artifacts that grant the Darkin trait.,UFS
+Upward Mobility,https://cdn.metatft.com/file/metatft/augments/upwardmobility_iii.png,2-1; 3-2; 4-2,Buying XP costs 1 less. Gain 2 Health and 2 free rerolls whenever you level up.,UM
+Urf's Gambit,https://cdn.metatft.com/file/metatft/augments/urfsgambit_ii.png,3-2,"If you win your next player combat, gain a Spatula. If you lose, gain a Frying Pan. Gain a component anvil and 6 gold now.",UG
+Walk The True Path I,https://cdn.metatft.com/file/metatft/augments/walkthetruepath_ii.png,3-2,"Gain a Lesser Champion Duplicator, a Shen, a Jhin, and 6 gold. Ionia 10 gains a Prismatic upgrade.",WTT
+Walk The True Path II,https://cdn.metatft.com/file/metatft/augments/walkthetruepathplus_iii.png,3-2,"Gain 2 Lesser Champion Duplicators, a Jhin, a Shen, and an Infinity Edge. Ionia 10 gains a Prismatic upgrade.",WTT1
+Wand Overflow,https://cdn.metatft.com/file/metatft/augments/wandoverflow_iii.png,3-2; 4-2,Gain 4 Needlessly Large Rods. Your Needlessly Large Rods grant +5% Attack Speed.,WO
+Warlord's Honor,https://cdn.metatft.com/file/metatft/augments/unforgotten_ii.png,2-1; 3-2,"Every round, your team gain 5% Attack Damage and Ability Power, stacking up to 4 times.",WH
+Warpath,https://cdn.metatft.com/file/metatft/augments/warpath_ii.png,2-1,"Gain a 2-star 2-cost champion. After dealing 80 player damage, gain a chest of high cost champions and items.
+(Current: X)",WAR
+Water Axiom,https://cdn.metatft.com/file/metatft/augments/wateraxiom_i.png,2-1; 3-2; 4-2,Gain a Water Hex. Champions within gain 3 Mana Regen. Their damage 30% Shreds enemies for 5 seconds.,WA
+We Stick Together,https://cdn.metatft.com/file/metatft/augments/westicktogether_iii.png,2-1,"Gain a random Emblem and a completed item anvil. Allies that share a trait with that Emblem gain 20% Attack Speed. (Emblem Trait: X)
+
+Into The Arcane Tactician's Crown, 2025",WST
+Wild Growth,https://cdn.metatft.com/file/metatft/augments/wildgrowth_ii.png,2-1; 3-2,"3-star Yordles become massive, moving slower but gaining 15% Health and 25% Attack Damage and Ability Power. Gain a Rumble and Lulu.",WG
+Win Out,https://cdn.metatft.com/file/metatft/augments/winout_iii.png,3-2,"When you reach level 9, immediately level to 10 and gain 8 free Shop rerolls. Gain 6 XP now.",WO1
+Wood Axiom,https://cdn.metatft.com/file/metatft/augments/woodaxiom_i.png,2-1,"Gain a Wood Hex. Champions within gain 15% max Health. After combat, they permanently gain 40 Health.",WA1
+Worth the Wait,https://cdn.metatft.com/file/metatft/augments/worththewait_ii.png,2-1,"Gain a random 1-cost champion. After 2 rounds, gain another copy of them at the start of each round for the rest of the game.
+
+Champion: X",WTW
+Worth the Wait II,https://cdn.metatft.com/file/metatft/augments/worththewait_iii.png,2-1,"Gain 2 copies of a random 2-cost champion. Gain another copy of them at the start of each round for the rest of the game.
+
+Champion: X",WTW1
+Woven Magic,https://cdn.metatft.com/file/metatft/augments/wovenmagic_iii.png,2-1,"Gain a random item component. Every 2200 Mana your team spends grants an additional component (max X/3).
+
+Mana spent: X/2200",WM
