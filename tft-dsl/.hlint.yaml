@@ -1,0 +1,8 @@
+# HLint configuration for tft-dsl
+
+- ignore: {name: "Use camelCase"}
+- ignore: {name: "Redundant do"}
+- warn: {name: Use newtype instead of data}
+
+# Custom hints
+- warn: {lhs: "a ++ b ++ c", rhs: concat [a, b, c]}
