@@ -18,12 +18,16 @@ WORKDIR /build
 # Copy project files
 COPY . .
 
-# Update cabal and build with optimizations
-RUN cabal update && \
-    cabal build exe:tft-dsl \
+# Update cabal package index (cached separately)
+RUN cabal update
+
+# Build with optimizations
+RUN cabal build exe:tft-dsl \
     --enable-executable-static \
-    --ghc-options="-O2 -split-sections -optl-static" && \
-    mkdir -p /output && \
+    --ghc-options="-O2 -split-sections -optl-static -optc-fPIC"
+
+# Extract binary to output directory
+RUN mkdir -p /output && \
     cp $(cabal list-bin exe:tft-dsl) /output/tft-dsl-linux-x86_64
 
 # Compress binary with UPX

@@ -23,7 +23,7 @@ import System.Console.Haskeline
 import Control.Monad.IO.Class (liftIO)
 import Data.IORef
 import Data.List (find, isPrefixOf)
-import Data.Char (isDigit)
+import Data.Char (isDigit, toLower)
 
 -- | REPL state with mutable game state
 data REPLState = REPLState
@@ -41,6 +41,9 @@ data REPLCommand
   | Upgrade Text    -- Upgrade champion or item
   | Sell Text       -- Sell champion
   | Find Text       -- Find entities by fuzzy search
+  | Level (Maybe Int) -- Set or increment level
+  | Round (Maybe (Int, Int)) -- Set stage-round
+  | Money Int       -- Set gold amount
   | Unknown Text    -- Unknown command
   deriving (Show, Eq)
 
@@ -52,6 +55,9 @@ allCommands =
   , ("upgrade <entity>", "Upgrade a champion's stars or combine items")
   , ("sell <champion>", "Sell a champion and gain gold")
   , ("find <query>", "Search for champions/items/augments by name or shorthand")
+  , ("level [n]", "Set level to n, or increment by 1 if no argument")
+  , ("round [s r]", "Set stage-round to s-r, or increment if no arguments")
+  , ("money <n>", "Set gold to n")
   , ("help", "Show this help message")
   , ("quit", "Exit the REPL (aliases: exit, q)")
   ]
@@ -97,37 +103,100 @@ parseCommand input =
     "find" | length parts >= 2 -> Find (T.unwords $ tail parts)
     "f" | length parts >= 2 -> Find (T.unwords $ tail parts)
 
+    "level" -> parseLevel (tail parts)
+    "l" -> parseLevel (tail parts)
+
+    "round" -> parseRound (tail parts)
+    "r" -> parseRound (tail parts)
+
+    "money" | length parts >= 2 -> parseMoney (tail parts)
+    "m" | length parts >= 2 -> parseMoney (tail parts)
+
     "" -> Unknown ""
     _ -> Unknown trimmed
+  where
+    parseLevel [] = Level Nothing
+    parseLevel (n:_) = case reads (T.unpack n) of
+      [(val, "")] -> Level (Just val)
+      _ -> Unknown input
+
+    parseRound [] = Round Nothing
+    parseRound [s, rd] = case (reads (T.unpack s), reads (T.unpack rd)) of
+      ([(stage, "")], [(rnd, "")]) -> Round (Just (stage, rnd))
+      _ -> Unknown input
+    parseRound _ = Unknown input
+
+    parseMoney (n:_) = case reads (T.unpack n) of
+      [(val, "")] -> Money val
+      _ -> Unknown input
+    parseMoney _ = Unknown input
 
 -- | Completion function for Haskeline
 completeFunc :: GameData -> CompletionFunc IO
 completeFunc gameData = completeWord Nothing " \t" $ \prefix -> do
-  let prefixText = T.pack prefix
-      prefixLower = T.toLower prefixText
+  let prefixLower = map toLower prefix
 
-      -- Get all possible completions
-      commandCompletions = ["print", "add", "upgrade", "sell", "find", "help", "quit", "exit", "p", "a", "u", "s", "f", "h", "q"]
+      -- Command completions (no shorthands needed)
+      commandCompletions = ["print", "add", "upgrade", "sell", "find", "level", "round", "money", "help", "quit", "exit", "p", "a", "u", "s", "f", "l", "r", "m", "h", "q"]
 
-      -- Get entity completions from game data
-      championNames = map (T.unpack . T.toLower . cdName) (M.elems $ gdChampions gameData)
-      championShorthands = map (\(ChampionShorthand sh) -> T.unpack $ T.toLower sh) (M.keys $ gdChampions gameData)
+      -- Build entity completions with format: "name (SHORTHAND)"
+      -- This creates completions that match on both name and shorthand
+      championCompletions =
+        [ (T.unpack $ T.toLower $ cdName champ, T.unpack sh)
+        | champ <- M.elems (gdChampions gameData)
+        , let ChampionShorthand sh = cdShorthand champ
+        ]
 
-      itemNames = map (T.unpack . T.toLower . idName) (M.elems $ gdItems gameData)
-      itemShorthands = map (\(ItemShorthand sh) -> T.unpack $ T.toLower sh) (M.keys $ gdItems gameData)
+      itemCompletions =
+        [ (T.unpack $ T.toLower $ idName item, T.unpack sh)
+        | item <- M.elems (gdItems gameData)
+        , let ItemShorthand sh = idShorthand item
+        ]
 
-      augmentNames = map (T.unpack . T.toLower . adName) (M.elems $ gdAugments gameData)
-      augmentShorthands = map (\(AugmentShorthand sh) -> T.unpack $ T.toLower sh) (M.keys $ gdAugments gameData)
+      augmentCompletions =
+        [ (T.unpack $ T.toLower $ adName aug, T.unpack sh)
+        | aug <- M.elems (gdAugments gameData)
+        , let AugmentShorthand sh = adShorthand aug
+        ]
 
-      allCompletions = commandCompletions
-                    ++ championNames ++ championShorthands
-                    ++ itemNames ++ itemShorthands
-                    ++ augmentNames ++ augmentShorthands
+      -- Filter commands
+      matchingCommands = filter (prefixLower `isPrefixOf`) commandCompletions
 
-      -- Filter completions by prefix
-      matches = filter (prefix `isPrefixOf`) allCompletions
+      -- Filter entities - match on either name or shorthand
+      matchingChampions =
+        [ makeCompletion name sh
+        | (name, sh) <- championCompletions
+        , prefixLower `isPrefixOf` name || prefixLower `isPrefixOf` map toLower sh
+        ]
 
-  return $ map simpleCompletion matches
+      matchingItems =
+        [ makeCompletion name sh
+        | (name, sh) <- itemCompletions
+        , prefixLower `isPrefixOf` name || prefixLower `isPrefixOf` map toLower sh
+        ]
+
+      matchingAugments =
+        [ makeCompletion name sh
+        | (name, sh) <- augmentCompletions
+        , prefixLower `isPrefixOf` name || prefixLower `isPrefixOf` map toLower sh
+        ]
+
+      -- Combine all matches
+      allMatches = map simpleCompletion matchingCommands
+                ++ matchingChampions
+                ++ matchingItems
+                ++ matchingAugments
+
+  return allMatches
+
+-- | Create a completion with name and shorthand
+-- The replacement is just the name, but the display shows "name (SHORTHAND)"
+makeCompletion :: String -> String -> Completion
+makeCompletion name shorthand = Completion
+  { replacement = name
+  , display = name ++ " (" ++ shorthand ++ ")"
+  , isFinished = True
+  }
 
 -- | Run the REPL loop
 runREPL :: Maybe Text -> GameData -> Handle -> IO ()
@@ -225,6 +294,18 @@ executeCommand cmd state = case cmd of
     handleFind state query
     return True
 
+  Level maybeLevel -> do
+    handleLevel state maybeLevel
+    return True
+
+  Round maybeRound -> do
+    handleRound state maybeRound
+    return True
+
+  Money amount -> do
+    handleMoney state amount
+    return True
+
   Unknown "" -> return True  -- Empty input
 
   Unknown cmdText -> do
@@ -240,12 +321,29 @@ handleAdd :: REPLState -> Text -> Bool -> IO ()
 handleAdd state entity printAfter = do
   currentState <- readIORef (replGameStateRef state)
 
-  case currentState of
+  -- Get or create game state
+  gs <- case currentState of
     Nothing -> do
-      setSGR [SetColor Foreground Vivid Red]
-      putStrLn "Error: No game state loaded. Cannot add to empty state."
+      -- Create default game state
+      let defaultState = GameState
+            { gsLevel = 1
+            , gsStage = 1
+            , gsRound = 1
+            , gsGold = 0
+            , gsHealth = 100
+            , gsBoard = []
+            , gsItems = []
+            , gsAugments = []
+            }
+      writeIORef (replGameStateRef state) (Just defaultState)
+      setSGR [SetColor Foreground Vivid Yellow]
+      putStrLn "Created new game state (Level 1, Stage 1-1, 0g, 100h)"
       setSGR [Reset]
-    Just gs -> do
+      return defaultState
+    Just gs -> return gs
+
+  -- Now proceed with adding the entity
+  do
       -- Parse entity (could be: ANI, 2ANI, IE, HG, etc.)
       let (stars, shorthand) = parseEntityInput entity
 
@@ -393,6 +491,116 @@ handleSell state champion = do
               putStrLn $ "Sold " ++ T.unpack shorthand ++ " for " ++ show goldGained ++ " gold"
               putStrLn $ "New gold: " ++ show (gsGold gs + goldGained)
               setSGR [Reset]
+
+-- | Handle level command
+handleLevel :: REPLState -> Maybe Int -> IO ()
+handleLevel state maybeLevel = do
+  currentState <- readIORef (replGameStateRef state)
+
+  -- Get or create game state
+  gs <- case currentState of
+    Nothing -> do
+      let defaultState = GameState
+            { gsLevel = 1
+            , gsStage = 1
+            , gsRound = 1
+            , gsGold = 0
+            , gsHealth = 100
+            , gsBoard = []
+            , gsItems = []
+            , gsAugments = []
+            }
+      writeIORef (replGameStateRef state) (Just defaultState)
+      setSGR [SetColor Foreground Vivid Yellow]
+      putStrLn "Created new game state (Level 1, Stage 1-1, 0g, 100h)"
+      setSGR [Reset]
+      return defaultState
+    Just gs -> return gs
+
+  let newLevel = case maybeLevel of
+        Nothing -> min 10 (gsLevel gs + 1)  -- Increment, max 10
+        Just n -> max 1 (min 10 n)  -- Set to n, clamped to 1-10
+
+  let newState = gs { gsLevel = newLevel }
+  writeIORef (replGameStateRef state) (Just newState)
+
+  setSGR [SetColor Foreground Vivid Green]
+  putStrLn $ "Level set to " ++ show newLevel
+  setSGR [Reset]
+
+-- | Handle round command
+handleRound :: REPLState -> Maybe (Int, Int) -> IO ()
+handleRound state maybeRound = do
+  currentState <- readIORef (replGameStateRef state)
+
+  -- Get or create game state
+  gs <- case currentState of
+    Nothing -> do
+      let defaultState = GameState
+            { gsLevel = 1
+            , gsStage = 1
+            , gsRound = 1
+            , gsGold = 0
+            , gsHealth = 100
+            , gsBoard = []
+            , gsItems = []
+            , gsAugments = []
+            }
+      writeIORef (replGameStateRef state) (Just defaultState)
+      setSGR [SetColor Foreground Vivid Yellow]
+      putStrLn "Created new game state (Level 1, Stage 1-1, 0g, 100h)"
+      setSGR [Reset]
+      return defaultState
+    Just gs -> return gs
+
+  let (newStage, newRound) = case maybeRound of
+        Nothing ->
+          -- Increment round
+          if gsRound gs >= 7
+          then (gsStage gs + 1, 1)  -- Next stage
+          else (gsStage gs, gsRound gs + 1)  -- Next round
+        Just (s, r) -> (max 1 s, max 1 (min 7 r))  -- Set to s-r, round clamped to 1-7
+
+  let newState = gs { gsStage = newStage, gsRound = newRound }
+  writeIORef (replGameStateRef state) (Just newState)
+
+  setSGR [SetColor Foreground Vivid Green]
+  putStrLn $ "Round set to " ++ show newStage ++ "-" ++ show newRound
+  setSGR [Reset]
+
+-- | Handle money command
+handleMoney :: REPLState -> Int -> IO ()
+handleMoney state amount = do
+  currentState <- readIORef (replGameStateRef state)
+
+  -- Get or create game state
+  gs <- case currentState of
+    Nothing -> do
+      let defaultState = GameState
+            { gsLevel = 1
+            , gsStage = 1
+            , gsRound = 1
+            , gsGold = 0
+            , gsHealth = 100
+            , gsBoard = []
+            , gsItems = []
+            , gsAugments = []
+            }
+      writeIORef (replGameStateRef state) (Just defaultState)
+      setSGR [SetColor Foreground Vivid Yellow]
+      putStrLn "Created new game state (Level 1, Stage 1-1, 0g, 100h)"
+      setSGR [Reset]
+      return defaultState
+    Just gs -> return gs
+
+  let newGold = max 0 amount  -- Can't have negative gold
+
+  let newState = gs { gsGold = newGold }
+  writeIORef (replGameStateRef state) (Just newState)
+
+  setSGR [SetColor Foreground Vivid Green]
+  putStrLn $ "Gold set to " ++ show newGold
+  setSGR [Reset]
 
 -- | Handle find command
 handleFind :: REPLState -> Text -> IO ()

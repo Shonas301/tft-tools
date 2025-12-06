@@ -14,7 +14,6 @@ RUN apt-get update && apt-get install -y \
     libgmp-dev \
     zlib1g-dev \
     libtinfo-dev \
-    upx-ucl \
     && rm -rf /var/lib/apt/lists/*
 
 # Install GHC for Windows via ghcup
@@ -33,16 +32,20 @@ WORKDIR /build
 # Copy project files
 COPY . .
 
+# Update cabal package index (cached separately)
+RUN cabal update
+
 # Configure for Windows cross-compilation
-RUN cabal update && \
-    cabal build exe:tft-dsl \
+RUN cabal build exe:tft-dsl \
     --with-compiler=x86_64-w64-mingw32-ghc \
-    --ghc-options="-O2 -split-sections -optl-static -optl-pthread" && \
-    mkdir -p /output && \
+    --ghc-options="-O2 -split-sections -optl-static -optl-pthread"
+
+# Extract binary to output directory
+RUN mkdir -p /output && \
     cp $(cabal list-bin exe:tft-dsl) /output/tft-dsl-windows-x86_64.exe
 
-# Compress binary with UPX
-RUN upx --best --lzma /output/tft-dsl-windows-x86_64.exe || true
+# Compress binary with UPX (if available)
+RUN upx --best --lzma /output/tft-dsl-windows-x86_64.exe 2>/dev/null || echo "UPX not available, skipping compression"
 
 # Output stage
 FROM scratch

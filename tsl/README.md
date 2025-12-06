@@ -33,10 +33,26 @@ curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 # Clone and build
 git clone https://github.com/yourusername/tft-tools.git
 cd tft-tools/tsl
+
+# Build using Make (recommended)
+make build
+
+# Or using cabal directly
 cabal build
 
 # Or build optimized release binary
 ./build-release.sh
+```
+
+**Quick Make Commands:**
+```bash
+make help              # Show all available commands
+make build             # Build locally
+make test              # Run tests
+make run               # Run the REPL
+make clean             # Clean build artifacts
+make docker-build      # Build Linux binary with Docker
+make docker-build-all  # Build all platform binaries with Docker
 ```
 
 See [BUILD.md](BUILD.md) for detailed build instructions, Docker builds, and cross-compilation.
@@ -135,6 +151,25 @@ tft>
   - Gold formula: `level * championCost - (level == 1 ? 0 : 1)`
   - Updates gold counter automatically
 
+**Game State Modification Commands:**
+- **`level [n]`** (alias: `l`) - Set or increment player level
+  - Examples:
+    - `level` - Increment level by 1 (max 10)
+    - `level 5` - Set level to 5
+  - Level is clamped to 1-10
+
+- **`round [stage round]`** (alias: `r`) - Set or increment stage-round
+  - Examples:
+    - `round` - Increment to next round (wraps to next stage after 7)
+    - `round 3 2` - Set to stage 3, round 2
+  - Automatically advances to next stage after round 7
+
+- **`money <n>`** (alias: `m`) - Set gold amount
+  - Examples:
+    - `money 50` - Set gold to 50
+    - `money 0` - Reset gold to 0
+  - Cannot set negative gold
+
 **Search & Discovery Commands:**
 - **`find <query>`** (alias: `f`) - Search for champions/items/augments by name or shorthand
   - Examples:
@@ -149,14 +184,28 @@ tft>
 **Tab Completion:**
 The REPL includes intelligent tab completion for:
 - Command names (`add`, `upgrade`, `sell`, `find`, etc.)
-- Champion names and shorthands
-- Item names and shorthands
-- Augment names and shorthands
+- Champions, items, and augments (shown as `name (SHORTHAND)`)
 
 Press `Tab` while typing to auto-complete or see suggestions.
 
+Tab completion matches on both full names and shorthands:
+- Type `ani` + Tab → `anivia (ANI)`
+- Type `ie` + Tab → Shows multiple matches: `infinity edge (IE)`, `invoker emblem (IE1)`, etc.
+- Completions display the shorthand in parentheses for easy reference
+
 **Example Session:**
 ```
+# Starting without an initial state creates a default game state
+tft> level 5
+Created new game state (Level 1, Stage 1-1, 0g, 100h)
+Level set to 5
+
+tft> round 3 2
+Round set to 3-2
+
+tft> money 50
+Gold set to 50
+
 tft> add 2ani *
 Added ANI
 

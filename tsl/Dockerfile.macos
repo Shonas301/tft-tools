@@ -19,13 +19,15 @@ WORKDIR /build
 # Copy project files
 COPY . .
 
-# Update cabal
+# Update cabal package index (cached separately)
 RUN cabal update
 
 # Build for macOS x86_64
 RUN cabal build exe:tft-dsl \
-    --ghc-options="-O2 -split-sections" && \
-    mkdir -p /output && \
+    --ghc-options="-O2 -split-sections"
+
+# Extract binary to output directory
+RUN mkdir -p /output && \
     cp $(cabal list-bin exe:tft-dsl) /output/tft-dsl-macos-x86_64
 
 # Note: For Apple Silicon (arm64), you would need:
