@@ -8,9 +8,38 @@ This tool provides a concise string representation of TFT game states, similar t
 
 ## Installation
 
+### Quick Start (Pre-built Binaries)
+
+Download the latest binary for your platform from [Releases](https://github.com/yourusername/tft-tools/releases):
+
+- **Linux**: `tft-dsl-linux-x86_64`
+- **macOS**: `tft-dsl-macos-x86_64` (Intel) or `tft-dsl-macos-arm64` (Apple Silicon)
+- **Windows**: `tft-dsl-windows-x86_64.exe`
+
+Make executable (Linux/macOS):
 ```bash
-cabal build
+chmod +x tft-dsl-*
+./tft-dsl-* --help
 ```
+
+### Build from Source
+
+**Prerequisites**: [GHCup](https://www.haskell.org/ghcup/) (Haskell toolchain)
+
+```bash
+# Install Haskell (if not already installed)
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+
+# Clone and build
+git clone https://github.com/yourusername/tft-tools.git
+cd tft-tools/tsl
+cabal build
+
+# Or build optimized release binary
+./build-release.sh
+```
+
+See [BUILD.md](BUILD.md) for detailed build instructions, Docker builds, and cross-compilation.
 
 ## Usage
 
@@ -79,11 +108,78 @@ tft>
 
 #### REPL Commands
 
+**Display Commands:**
 - **`print`** (alias: `p`) - Display the current game state as TSL
 - **`help`** (aliases: `h`, `?`) - Show available commands
 - **`quit`** (aliases: `exit`, `q`) - Exit the REPL
 
-More commands will be added in future updates.
+**Game State Mutation Commands:**
+- **`add <entity> [*]`** (alias: `a`) - Add champion/item/augment to game state
+  - Examples:
+    - `add ani` - Add 1-star Anivia
+    - `add 2ani` - Add 2-star Anivia
+    - `add ie` - Add Infinity Edge item
+    - `add aa` - Add Air Axiom augment
+    - `add ani *` - Add Anivia and print the state after
+  - The `*` flag automatically prints the game state after adding
+
+- **`upgrade <entity>`** (alias: `u`) - Upgrade champion stars or combine items
+  - Examples:
+    - `upgrade ani` - Upgrade Anivia from 1★ to 2★ (or 2★ to 3★)
+  - Champion upgrades increment star level (max 3★)
+  - Item combining not yet fully implemented
+
+- **`sell <champion>`** (alias: `s`) - Sell a champion and gain gold
+  - Examples:
+    - `sell ani` - Sell Anivia and gain gold
+  - Gold formula: `level * championCost - (level == 1 ? 0 : 1)`
+  - Updates gold counter automatically
+
+**Search & Discovery Commands:**
+- **`find <query>`** (alias: `f`) - Search for champions/items/augments by name or shorthand
+  - Examples:
+    - `find ani` - Find all entities with "ani" in name or shorthand
+    - `find sword` - Find all entities containing "sword"
+    - `find ie` - Find by shorthand (Infinity Edge, Invoker Emblem, etc.)
+  - Searches across all champions, items, and augments
+  - Case-insensitive partial matching
+  - Results grouped by type with color coding
+  - Displays up to 10 results per category
+
+**Tab Completion:**
+The REPL includes intelligent tab completion for:
+- Command names (`add`, `upgrade`, `sell`, `find`, etc.)
+- Champion names and shorthands
+- Item names and shorthands
+- Augment names and shorthands
+
+Press `Tab` while typing to auto-complete or see suggestions.
+
+**Example Session:**
+```
+tft> add 2ani *
+Added ANI
+
+Current game state (TSL):
+5 3-2 50g 100h [c=2ANI] [] []
+
+tft> add ie *
+Added IE
+
+Current game state (TSL):
+5 3-2 50g 100h [c=2ANI] [i=IE] []
+
+tft> upgrade ani
+Upgraded ANI to 3-star
+
+tft> sell ani
+Sold ANI for 4 gold
+New gold: 54
+
+tft> print
+Current game state (TSL):
+5 3-2 54g 100h [] [i=IE] []
+```
 
 #### Session Logging
 

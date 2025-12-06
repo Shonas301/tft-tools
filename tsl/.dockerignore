@@ -1,0 +1,45 @@
+# Docker ignore file for tft-dsl builds
+# Excludes unnecessary files from Docker build context
+
+# Build artifacts
+dist/
+dist-newstyle/
+.stack-work/
+*.hi
+*.o
+*.so
+*.dylib
+*.dll
+*.exe
+bin/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+*.md
+!README.md
+
+# Logs
+*.log
+tft-session-*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+test/
+
+# Old backups
+*.old
+*.bak
+*.tmp

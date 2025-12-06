@@ -33,3 +33,10 @@ cabal.project.local~
 
 # Cabal build outputs
 dist-newstyle/
+
+# Session logs
+*.log
+tft-session-*.log
+
+# Build binaries
+bin/

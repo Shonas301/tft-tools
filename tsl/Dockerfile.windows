@@ -1,0 +1,60 @@
+# Dockerfile for building tsl binary for Windows (x86_64)
+# Uses Wine and MinGW cross-compilation
+
+FROM debian:bookworm-slim AS builder
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    build-essential \
+    mingw-w64 \
+    wine \
+    wine64 \
+    git \
+    libgmp-dev \
+    zlib1g-dev \
+    libtinfo-dev \
+    upx-ucl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install GHC for Windows via ghcup
+RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | \
+    BOOTSTRAP_HASKELL_NONINTERACTIVE=1 \
+    BOOTSTRAP_HASKELL_GHC_VERSION=9.6.7 \
+    BOOTSTRAP_HASKELL_INSTALL_NO_STACK=1 \
+    sh
+
+# Add ghcup to PATH
+ENV PATH="/root/.ghcup/bin:${PATH}"
+
+# Set working directory
+WORKDIR /build
+
+# Copy project files
+COPY . .
+
+# Configure for Windows cross-compilation
+RUN cabal update && \
+    cabal build exe:tft-dsl \
+    --with-compiler=x86_64-w64-mingw32-ghc \
+    --ghc-options="-O2 -split-sections -optl-static -optl-pthread" && \
+    mkdir -p /output && \
+    cp $(cabal list-bin exe:tft-dsl) /output/tft-dsl-windows-x86_64.exe
+
+# Compress binary with UPX
+RUN upx --best --lzma /output/tft-dsl-windows-x86_64.exe || true
+
+# Output stage
+FROM scratch
+COPY --from=builder /output/tft-dsl-windows-x86_64.exe /tft-dsl-windows-x86_64.exe
+
+# Usage:
+# Build: docker build -f Dockerfile.windows -t tft-dsl-builder:windows .
+# Extract binary:
+#   docker create --name tft-dsl-temp tft-dsl-builder:windows
+#   docker cp tft-dsl-temp:/tft-dsl-windows-x86_64.exe ./bin/
+#   docker rm tft-dsl-temp
+#
+# Note: This requires a Windows cross-compiler setup.
+# Alternative: Build natively on Windows using:
+#   cabal build --ghc-options="-O2 -static"

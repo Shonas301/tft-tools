@@ -1,0 +1,41 @@
+# Dockerfile for building tsl binary for Linux (x86_64)
+# Build the binary inside a container and extract it
+
+FROM haskell:9.6-slim AS builder
+
+# Install system dependencies for static linking
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libgmp-dev \
+    zlib1g-dev \
+    libtinfo-dev \
+    upx-ucl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /build
+
+# Copy project files
+COPY . .
+
+# Update cabal and build with optimizations
+RUN cabal update && \
+    cabal build exe:tft-dsl \
+    --enable-executable-static \
+    --ghc-options="-O2 -split-sections -optl-static" && \
+    mkdir -p /output && \
+    cp $(cabal list-bin exe:tft-dsl) /output/tft-dsl-linux-x86_64
+
+# Compress binary with UPX
+RUN upx --best --lzma /output/tft-dsl-linux-x86_64 || true
+
+# Output stage - just the binary
+FROM scratch
+COPY --from=builder /output/tft-dsl-linux-x86_64 /tft-dsl-linux-x86_64
+
+# Usage:
+# Build: docker build -f Dockerfile.linux -t tft-dsl-builder:linux .
+# Extract binary:
+#   docker create --name tft-dsl-temp tft-dsl-builder:linux
+#   docker cp tft-dsl-temp:/tft-dsl-linux-x86_64 ./bin/
+#   docker rm tft-dsl-temp
