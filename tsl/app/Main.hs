@@ -17,13 +17,8 @@ main :: IO ()
 main = do
   options <- parseCLI
 
-  -- Load game data from CSV files
-  dataResult <- loadGameData
-    "tft-data/set_16_champions.csv"
-    "tft-data/set_16_items.csv"
-    "tft-data/set_16_augments.csv"
-
-  gameData <- case dataResult of
+  -- Load game data from embedded CSV files
+  gameData <- case loadGameDataEmbedded of
     Left err -> do
       putStrLn $ "Error loading game data: " ++ err
       exitFailure

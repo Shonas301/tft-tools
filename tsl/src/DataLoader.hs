@@ -1,8 +1,10 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
 
 module DataLoader
   ( GameData(..)
   , loadGameData
+  , loadGameDataEmbedded
   , lookupChampion
   , lookupItem
   , lookupAugment
@@ -12,10 +14,12 @@ import Types
 import Data.Text (Text)
 import qualified Data.Text as T
 import qualified Data.ByteString.Lazy as BL
+import Data.ByteString (ByteString)
 import Data.Csv hiding (lookup)
 import qualified Data.Vector as V
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
+import Data.FileEmbed (embedFile)
 
 -- | Container for all game data
 data GameData = GameData
@@ -109,6 +113,60 @@ instance FromNamedRecord AugmentData where
     shorthandRaw <- r .: "shorthand"
     let shorthand = AugmentShorthand (T.toUpper shorthandRaw)
     return $ AugmentData name icon tags description shorthand
+
+-- | Embedded CSV data using Template Haskell
+embeddedChampionsCSV :: ByteString
+embeddedChampionsCSV = $(embedFile "tft-data/set_16_champions.csv")
+
+embeddedItemsCSV :: ByteString
+embeddedItemsCSV = $(embedFile "tft-data/set_16_items.csv")
+
+embeddedAugmentsCSV :: ByteString
+embeddedAugmentsCSV = $(embedFile "tft-data/set_16_augments.csv")
+
+-- | Load game data from embedded CSV files
+-- This version loads the data compiled into the executable
+loadGameDataEmbedded :: Either String GameData
+loadGameDataEmbedded =
+  let champResult = loadChampionsFromBS (BL.fromStrict embeddedChampionsCSV)
+      itemResult = loadItemsFromBS (BL.fromStrict embeddedItemsCSV)
+      augResult = loadAugmentsFromBS (BL.fromStrict embeddedAugmentsCSV)
+  in case (champResult, itemResult, augResult) of
+    (Right champs, Right items, Right augs) ->
+      Right $ GameData champs items augs
+    (Left err, _, _) -> Left $ "Error loading champions: " ++ err
+    (_, Left err, _) -> Left $ "Error loading items: " ++ err
+    (_, _, Left err) -> Left $ "Error loading augments: " ++ err
+
+-- | Load champions from ByteString
+loadChampionsFromBS :: BL.ByteString -> Either String (Map ChampionShorthand ChampionData)
+loadChampionsFromBS csvData =
+  case decodeByName csvData of
+    Left err -> Left err
+    Right (_, rows) -> do
+      let champList = V.toList rows
+      let champMap = Map.fromList [(cdShorthand c, c) | c <- champList]
+      Right champMap
+
+-- | Load items from ByteString
+loadItemsFromBS :: BL.ByteString -> Either String (Map ItemShorthand ItemData)
+loadItemsFromBS csvData =
+  case decodeByName csvData of
+    Left err -> Left err
+    Right (_, rows) -> do
+      let itemList = V.toList rows
+      let itemMap = Map.fromList [(idShorthand i, i) | i <- itemList]
+      Right itemMap
+
+-- | Load augments from ByteString
+loadAugmentsFromBS :: BL.ByteString -> Either String (Map AugmentShorthand AugmentData)
+loadAugmentsFromBS csvData =
+  case decodeByName csvData of
+    Left err -> Left err
+    Right (_, rows) -> do
+      let augList = V.toList rows
+      let augMap = Map.fromList [(adShorthand a, a) | a <- augList]
+      Right augMap
 
 -- Lookup functions
 

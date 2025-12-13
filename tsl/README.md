@@ -298,9 +298,10 @@ The project consists of:
 ### Library Modules
 1. **Types.hs**: Core data type definitions
 2. **Parser.hs**: Megaparsec-based DSL parser
-3. **DataLoader.hs**: CSV data loading and lookup functions
+3. **DataLoader.hs**: CSV data loading with embedded data via Template Haskell
 4. **CLI.hs**: Command-line argument parsing
-5. **REPL.hs**: Interactive REPL implementation
+5. **REPL.hs**: Interactive REPL implementation with tab completion
+6. **Encoder.hs**: Game state to TSL string encoding
 
 ### Testing
 - **ParserSpec.hs**: Parser unit tests
@@ -312,10 +313,19 @@ The project consists of:
 
 ## Data Files
 
-The tool reads from CSV files in `tft-data/`:
-- Champion data with costs, traits, and shorthands
-- Item data with types and shorthands
-- Augment data with tags and shorthands
+**The CSV data is embedded directly into the executable at compile time**, making it fully standalone with no external dependencies.
+
+The embedded data includes:
+- Champion data with costs, traits, and shorthands (101 champions)
+- Item data with types and shorthands (165 items)
+- Augment data with tags and shorthands (282 augments)
+
+Source CSV files are located in `tft-data/`:
+- `set_16_champions.csv`
+- `set_16_items.csv`
+- `set_16_augments.csv`
+
+The executable uses Template Haskell and the `file-embed` package to embed these files during compilation, ensuring the binary works anywhere without requiring access to the CSV files.
 
 ## Development
 
