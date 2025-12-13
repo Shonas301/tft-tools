@@ -15,8 +15,11 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /build
 
+# Copy CSV data files first (from parent directory's tft-data)
+COPY tft-data/*.csv ./tft-data/
+
 # Copy project files
-COPY . .
+COPY tsl/ .
 
 # Update cabal package index (cached separately)
 RUN cabal update

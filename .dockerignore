@@ -1,0 +1,33 @@
+# Ignore everything except what we explicitly need
+*
+
+# Allow tsl/ directory (the project)
+!tsl/
+
+# But exclude the tft-data symlink inside tsl/ (CSV files copied separately)
+tsl/tft-data
+
+# Allow tft-data/ directory (CSV files)
+!tft-data/
+
+# But ignore build artifacts and temporary files in tsl/
+tsl/dist/
+tsl/dist-newstyle/
+tsl/.stack-work/
+tsl/bin/
+tsl/*.log
+tsl/tft-session-*.log
+tsl/**/*.o
+tsl/**/*.hi
+tsl/**/*.dyn_o
+tsl/**/*.dyn_hi
+tsl/.ghc.environment.*
+tsl/cabal.project.local*
+
+# Ignore documentation and progress tracking
+tsl/claude.md
+tsl/progress.md
+
+# Ignore git
+.git/
+.gitignore

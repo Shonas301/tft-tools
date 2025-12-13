@@ -25,8 +25,11 @@ ENV PATH="C:\\ghcup\\bin;${PATH}"
 # Set working directory
 WORKDIR C:\\build
 
+# Copy CSV data files first (from parent directory's tft-data)
+COPY tft-data/*.csv .\\tft-data\\
+
 # Copy project files
-COPY . .
+COPY tsl/ .
 
 # Update cabal and build
 RUN cabal update && \

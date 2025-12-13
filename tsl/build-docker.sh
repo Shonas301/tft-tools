@@ -17,7 +17,9 @@ build_platform() {
     local output_binary=$3
 
     echo "Building for $platform..."
-    docker build -f "$dockerfile" -t "tft-dsl-builder:$platform" .
+    # Use parent directory as build context to include tft-data
+    # Dockerfile path is relative to current dir, build context is parent dir
+    docker build -f "$dockerfile" -t "tft-dsl-builder:$platform" ..
 
     echo "Extracting binary..."
     # Use a dummy command for scratch-based images

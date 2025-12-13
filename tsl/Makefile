@@ -86,10 +86,10 @@ test: ## Run tests locally using cabal
 
 test-docker: ## Run tests in Linux Docker container
 	@echo "Running tests in Linux Docker container..."
-	docker build -f Dockerfile.linux --target builder -t tft-dsl-test-linux .
+	docker build -f Dockerfile.linux --target builder -t tft-dsl-test-linux ..
 	docker run --rm tft-dsl-test-linux cabal test
 
 test-windows: ## Run tests in Windows Docker container
 	@echo "Running tests in Windows Docker container..."
-	docker build -f Dockerfile.windows --target builder -t tft-dsl-test-windows .
+	docker build -f Dockerfile.windows --target builder -t tft-dsl-test-windows ..
 	docker run --rm tft-dsl-test-windows cabal test

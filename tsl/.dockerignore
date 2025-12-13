@@ -1,6 +1,10 @@
 # Docker ignore file for tft-dsl builds
 # Excludes unnecessary files from Docker build context
 
+# IMPORTANT: Exclude the tft-data symlink
+# CSV files are copied separately from the parent directory's tft-data/ folder
+tft-data
+
 # Build artifacts
 dist/
 dist-newstyle/
