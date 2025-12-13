@@ -1,7 +1,7 @@
 # TFT-DSL Makefile
 # Provides convenient commands for building, testing, and running tsl
 
-.PHONY: help clean build docker-build docker-build-mac docker-build-windows docker-build-all run docker-run test test-docker test-mac test-windows
+.PHONY: help clean build build-macos docker-build docker-build-windows docker-build-all run docker-run test test-docker
 
 # Default target - show help
 .DEFAULT_GOAL := help
@@ -40,6 +40,15 @@ build: ## Build tsl locally using cabal
 	@echo "Building tsl with cabal..."
 	cabal build exe:tft-dsl
 
+build-macos: ## Build macOS binary natively and copy to bin/
+	@echo "Building macOS binary natively..."
+	@mkdir -p bin
+	cabal build exe:tft-dsl --ghc-options="-O2"
+	@echo "Copying binary to bin/..."
+	cp $$(cabal list-bin exe:tft-dsl) ./bin/tft-dsl-macos-$$(uname -m)
+	@echo "✓ Built: bin/tft-dsl-macos-$$(uname -m)"
+	@ls -lh bin/tft-dsl-macos-$$(uname -m)
+
 run: ## Run tsl locally using cabal
 	@echo "Running tsl..."
 	cabal run tft-dsl
@@ -50,16 +59,13 @@ docker-build: ## Build Linux binary using Docker
 	@echo "Building Linux binary with Docker..."
 	./build-docker.sh linux
 
-docker-build-mac: ## Build macOS binary using Docker
-	@echo "Building macOS binary with Docker..."
-	./build-docker.sh macos
-
-docker-build-windows: ## Build Windows binary using Docker
+docker-build-windows: ## Build Windows binary using Docker (requires Windows host)
 	@echo "Building Windows binary with Docker..."
+	@echo "Note: This requires Docker Desktop on Windows with Windows containers enabled"
 	./build-docker.sh windows
 
-docker-build-all: ## Build all platform binaries using Docker (Linux, macOS, Windows)
-	@echo "Building all platform binaries with Docker..."
+docker-build-all: ## Build all Docker platform binaries (currently Linux only)
+	@echo "Building all Docker platform binaries..."
 	./build-docker.sh all
 
 ##@ Docker Run
@@ -82,11 +88,6 @@ test-docker: ## Run tests in Linux Docker container
 	@echo "Running tests in Linux Docker container..."
 	docker build -f Dockerfile.linux --target builder -t tft-dsl-test-linux .
 	docker run --rm tft-dsl-test-linux cabal test
-
-test-mac: ## Run tests in macOS Docker container
-	@echo "Running tests in macOS Docker container..."
-	docker build -f Dockerfile.macos --target builder -t tft-dsl-test-macos .
-	docker run --rm tft-dsl-test-macos cabal test
 
 test-windows: ## Run tests in Windows Docker container
 	@echo "Running tests in Windows Docker container..."

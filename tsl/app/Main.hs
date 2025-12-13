@@ -19,9 +19,9 @@ main = do
 
   -- Load game data from CSV files
   dataResult <- loadGameData
-    "../tft-data/set_16_champions.csv"
-    "../tft-data/set_16_items.csv"
-    "../tft-data/set_16_augments.csv"
+    "tft-data/set_16_champions.csv"
+    "tft-data/set_16_items.csv"
+    "tft-data/set_16_augments.csv"
 
   gameData <- case dataResult of
     Left err -> do

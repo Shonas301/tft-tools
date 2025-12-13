@@ -36,22 +36,31 @@ spec = do
       parseCommand "Help" `shouldBe` Help
       parseCommand "QUIT" `shouldBe` Quit
 
-    it "parses 'add' command" $ do
-      parseCommand "add ani" `shouldBe` Add "ani" False
-      parseCommand "a ani" `shouldBe` Add "ani" False
-      parseCommand "add 2ani" `shouldBe` Add "2ani" False
-      parseCommand "add ani *" `shouldBe` Add "ani" True
-      parseCommand "add 2ani *" `shouldBe` Add "2ani" True
+    it "parses 'add' command with single entity" $ do
+      parseCommand "add ani" `shouldBe` Add ["ani"] False
+      parseCommand "a ani" `shouldBe` Add ["ani"] False
+      parseCommand "add 2ani" `shouldBe` Add ["2ani"] False
+      parseCommand "add ani *" `shouldBe` Add ["ani"] True
+      parseCommand "add 2ani *" `shouldBe` Add ["2ani"] True
+
+    it "parses 'add' command with multiple entities" $ do
+      parseCommand "add ani blit ie" `shouldBe` Add ["ani", "blit", "ie"] False
+      parseCommand "add 2ani 3blit ie *" `shouldBe` Add ["2ani", "3blit", "ie"] True
+      parseCommand "a ani ie rdb" `shouldBe` Add ["ani", "ie", "rdb"] False
 
     it "parses 'upgrade' command" $ do
       parseCommand "upgrade ani" `shouldBe` Upgrade "ani"
       parseCommand "u ani" `shouldBe` Upgrade "ani"
       parseCommand "upgrade ie" `shouldBe` Upgrade "ie"
 
-    it "parses 'sell' command" $ do
-      parseCommand "sell ani" `shouldBe` Sell "ani"
-      parseCommand "s ani" `shouldBe` Sell "ani"
-      parseCommand "sell 2ani" `shouldBe` Sell "2ani"
+    it "parses 'sell' command with single champion" $ do
+      parseCommand "sell ani" `shouldBe` Sell ["ani"]
+      parseCommand "s ani" `shouldBe` Sell ["ani"]
+      parseCommand "sell 2ani" `shouldBe` Sell ["2ani"]
+
+    it "parses 'sell' command with multiple champions" $ do
+      parseCommand "sell ani blit" `shouldBe` Sell ["ani", "blit"]
+      parseCommand "s ani blit ie" `shouldBe` Sell ["ani", "blit", "ie"]
 
     it "parses 'find' command" $ do
       parseCommand "find ani" `shouldBe` Find "ani"
@@ -78,7 +87,7 @@ spec = do
       commandNames `shouldContain` ["print"]
       commandNames `shouldContain` ["help"]
       commandNames `shouldContain` ["quit"]
-      commandNames `shouldContain` ["add <entity> [*]"]
+      commandNames `shouldContain` ["add <entity>... [*]"]
       commandNames `shouldContain` ["upgrade <entity>"]
-      commandNames `shouldContain` ["sell <champion>"]
+      commandNames `shouldContain` ["sell <champion>..."]
       commandNames `shouldContain` ["find <query>"]

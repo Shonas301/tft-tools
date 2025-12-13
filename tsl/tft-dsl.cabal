@@ -59,9 +59,9 @@ extra-doc-files:    CHANGELOG.md
 
 -- Extra source files to be distributed with the package, such as examples, or a tutorial module.
 extra-source-files: README.md
-                  , ../tft-data/set_16_champions.csv
-                  , ../tft-data/set_16_items.csv
-                  , ../tft-data/set_16_augments.csv
+                  , tft-data/set_16_champions.csv
+                  , tft-data/set_16_items.csv
+                  , tft-data/set_16_augments.csv
 
 common warnings
     ghc-options: -Wall

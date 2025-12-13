@@ -130,14 +130,17 @@ tft>
 - **`quit`** (aliases: `exit`, `q`) - Exit the REPL
 
 **Game State Mutation Commands:**
-- **`add <entity> [*]`** (alias: `a`) - Add champion/item/augment to game state
+- **`add <entity>... [*]`** (alias: `a`) - Add one or more champions/items/augments to game state
   - Examples:
     - `add ani` - Add 1-star Anivia
     - `add 2ani` - Add 2-star Anivia
+    - `add ani bli ash` - Add multiple champions in one command
+    - `add 2ani 3ash ie` - Add multiple entities with star levels
     - `add ie` - Add Infinity Edge item
     - `add aa` - Add Air Axiom augment
-    - `add ani *` - Add Anivia and print the state after
-  - The `*` flag automatically prints the game state after adding
+    - `add ani bli *` - Add multiple champions and print the state after
+  - The `*` flag automatically prints the game state after adding all entities
+  - Each entity is processed in order; errors are reported but don't stop processing
 
 - **`upgrade <entity>`** (alias: `u`) - Upgrade champion stars or combine items
   - Examples:
@@ -145,11 +148,13 @@ tft>
   - Champion upgrades increment star level (max 3★)
   - Item combining not yet fully implemented
 
-- **`sell <champion>`** (alias: `s`) - Sell a champion and gain gold
+- **`sell <champion>...`** (alias: `s`) - Sell one or more champions and gain gold
   - Examples:
     - `sell ani` - Sell Anivia and gain gold
+    - `sell ani bli ash` - Sell multiple champions in one command
   - Gold formula: `level * championCost - (level == 1 ? 0 : 1)`
-  - Updates gold counter automatically
+  - Updates gold counter automatically after each sale
+  - Each champion is processed in order; errors are reported but don't stop processing
 
 **Game State Modification Commands:**
 - **`level [n]`** (alias: `l`) - Set or increment player level
@@ -206,28 +211,28 @@ Round set to 3-2
 tft> money 50
 Gold set to 50
 
-tft> add 2ani *
+# Add multiple champions and items in one command
+tft> add 2ani bli 3ash ie rdb *
 Added ANI
-
-Current game state (TSL):
-5 3-2 50g 100h [c=2ANI] [] []
-
-tft> add ie *
+Added BLI
+Added ASH
 Added IE
+Added RDB
 
 Current game state (TSL):
-5 3-2 50g 100h [c=2ANI] [i=IE] []
+5 3-2 50g 100h [c=2ANI,c=1BLI,c=3ASH] [i=IE,i=RDB] []
 
 tft> upgrade ani
 Upgraded ANI to 3-star
 
-tft> sell ani
+# Sell multiple champions in one command
+tft> sell ani bli
 Sold ANI for 4 gold
-New gold: 54
+Sold BLI for 4 gold
 
 tft> print
 Current game state (TSL):
-5 3-2 54g 100h [] [i=IE] []
+5 3-2 58g 100h [c=3ASH] [i=IE,i=RDB] []
 ```
 
 #### Session Logging

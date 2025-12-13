@@ -40,3 +40,6 @@ tft-session-*.log
 
 # Build binaries
 bin/
+
+# Data symlink
+tft-data

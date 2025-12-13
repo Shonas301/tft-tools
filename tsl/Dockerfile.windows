@@ -1,63 +1,48 @@
 # Dockerfile for building tsl binary for Windows (x86_64)
-# Uses Wine and MinGW cross-compilation
+# Uses Microsoft Windows Server Core image
+# Note: This must be built on a Windows host with Docker Desktop configured for Windows containers
 
-FROM debian:bookworm-slim AS builder
+FROM mcr.microsoft.com/windows/servercore:ltsc2022 AS builder
 
-# Install build dependencies
-RUN apt-get update && apt-get install -y \
-    curl \
-    build-essential \
-    mingw-w64 \
-    wine \
-    wine64 \
-    git \
-    libgmp-dev \
-    zlib1g-dev \
-    libtinfo-dev \
-    && rm -rf /var/lib/apt/lists/*
+# Install Chocolatey package manager
+RUN powershell -Command \
+    Set-ExecutionPolicy Bypass -Scope Process -Force; \
+    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; \
+    iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
-# Install GHC for Windows via ghcup
-RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | \
-    BOOTSTRAP_HASKELL_NONINTERACTIVE=1 \
-    BOOTSTRAP_HASKELL_GHC_VERSION=9.6.7 \
-    BOOTSTRAP_HASKELL_INSTALL_NO_STACK=1 \
-    sh
+# Install Git and other dependencies
+RUN choco install -y git
 
-# Add ghcup to PATH
-ENV PATH="/root/.ghcup/bin:${PATH}"
+# Install GHCup for Windows
+RUN powershell -Command \
+    Set-ExecutionPolicy Bypass -Scope Process -Force; \
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
+    Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://www.haskell.org/ghcup/sh/bootstrap-haskell.ps1')
+
+# Add GHCup to PATH
+ENV PATH="C:\\ghcup\\bin;${PATH}"
 
 # Set working directory
-WORKDIR /build
+WORKDIR C:\\build
 
 # Copy project files
 COPY . .
 
-# Update cabal package index (cached separately)
-RUN cabal update
+# Update cabal and build
+RUN cabal update && \
+    cabal build exe:tft-dsl --ghc-options="-O2" && \
+    mkdir C:\\output && \
+    powershell -Command "Copy-Item (cabal list-bin exe:tft-dsl) C:\\output\\tft-dsl-windows-x86_64.exe"
 
-# Configure for Windows cross-compilation
-RUN cabal build exe:tft-dsl \
-    --with-compiler=x86_64-w64-mingw32-ghc \
-    --ghc-options="-O2 -split-sections -optl-static -optl-pthread"
-
-# Extract binary to output directory
-RUN mkdir -p /output && \
-    cp $(cabal list-bin exe:tft-dsl) /output/tft-dsl-windows-x86_64.exe
-
-# Compress binary with UPX (if available)
-RUN upx --best --lzma /output/tft-dsl-windows-x86_64.exe 2>/dev/null || echo "UPX not available, skipping compression"
-
-# Output stage
-FROM scratch
-COPY --from=builder /output/tft-dsl-windows-x86_64.exe /tft-dsl-windows-x86_64.exe
+# Final stage - create minimal image with just the binary
+FROM mcr.microsoft.com/windows/nanoserver:ltsc2022
+COPY --from=builder C:\\output\\tft-dsl-windows-x86_64.exe C:\\tft-dsl-windows-x86_64.exe
 
 # Usage:
 # Build: docker build -f Dockerfile.windows -t tft-dsl-builder:windows .
 # Extract binary:
 #   docker create --name tft-dsl-temp tft-dsl-builder:windows
-#   docker cp tft-dsl-temp:/tft-dsl-windows-x86_64.exe ./bin/
+#   docker cp tft-dsl-temp:C:\tft-dsl-windows-x86_64.exe ./bin/
 #   docker rm tft-dsl-temp
 #
-# Note: This requires a Windows cross-compiler setup.
-# Alternative: Build natively on Windows using:
-#   cabal build --ghc-options="-O2 -static"
+# Note: This requires Docker Desktop on Windows configured for Windows containers

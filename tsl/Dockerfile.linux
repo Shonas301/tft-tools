@@ -21,19 +21,19 @@ COPY . .
 # Update cabal package index (cached separately)
 RUN cabal update
 
-# Build with optimizations
-RUN cabal build exe:tft-dsl \
-    --enable-executable-static \
-    --ghc-options="-O2 -split-sections -optl-static -optc-fPIC"
+# Build the regular executable (dynamically linked)
+# Note: Not using tft-dsl-release because it requires LLVM (-fllvm flag)
+# and static linking is problematic with -fPIC requirements
+RUN cabal build exe:tft-dsl --ghc-options="-O2"
 
 # Extract binary to output directory
 RUN mkdir -p /output && \
     cp $(cabal list-bin exe:tft-dsl) /output/tft-dsl-linux-x86_64
 
-# Compress binary with UPX
-RUN upx --best --lzma /output/tft-dsl-linux-x86_64 || true
+# Compress binary with UPX (optional, may skip if it breaks the binary)
+RUN upx --best --lzma /output/tft-dsl-linux-x86_64 2>/dev/null || echo "Skipping UPX compression"
 
-# Output stage - just the binary
+# Final stage - place binary for extraction
 FROM scratch
 COPY --from=builder /output/tft-dsl-linux-x86_64 /tft-dsl-linux-x86_64
 
@@ -43,3 +43,6 @@ COPY --from=builder /output/tft-dsl-linux-x86_64 /tft-dsl-linux-x86_64
 #   docker create --name tft-dsl-temp tft-dsl-builder:linux
 #   docker cp tft-dsl-temp:/tft-dsl-linux-x86_64 ./bin/
 #   docker rm tft-dsl-temp
+#
+# Note: This binary is dynamically linked and requires glibc and other
+# system libraries to be present on the target Linux system

@@ -21,6 +21,7 @@ import System.Console.ANSI
 import System.IO (hFlush, stdout, Handle, hPutStrLn)
 import System.Console.Haskeline
 import Control.Monad.IO.Class (liftIO)
+import Control.Monad (when, foldM)
 import Data.IORef
 import Data.List (find, isPrefixOf)
 import Data.Char (isDigit, toLower)
@@ -37,9 +38,9 @@ data REPLCommand
   = Print           -- Display current TSL
   | Help            -- Show available commands
   | Quit            -- Exit REPL
-  | Add Text Bool   -- Add entity (CIA), Bool = print after
+  | Add [Text] Bool   -- Add entities (CIA), Bool = print after
   | Upgrade Text    -- Upgrade champion or item
-  | Sell Text       -- Sell champion
+  | Sell [Text]       -- Sell champions
   | Find Text       -- Find entities by fuzzy search
   | Level (Maybe Int) -- Set or increment level
   | Round (Maybe (Int, Int)) -- Set stage-round
@@ -51,9 +52,9 @@ data REPLCommand
 allCommands :: [(Text, Text)]
 allCommands =
   [ ("print", "Display the current game state as TSL")
-  , ("add <entity> [*]", "Add champion/item/augment (optional * to print after)")
+  , ("add <entity>... [*]", "Add one or more champions/items/augments (optional * to print after)")
   , ("upgrade <entity>", "Upgrade a champion's stars or combine items")
-  , ("sell <champion>", "Sell a champion and gain gold")
+  , ("sell <champion>...", "Sell one or more champions and gain gold")
   , ("find <query>", "Search for champions/items/augments by name or shorthand")
   , ("level [n]", "Set level to n, or increment by 1 if no argument")
   , ("round [s r]", "Set stage-round to s-r, or increment if no arguments")
@@ -82,23 +83,21 @@ parseCommand input =
 
     "add" | length parts >= 2 ->
         let hasAsterisk = T.isSuffixOf "*" (last parts)
-            entity = if hasAsterisk
-                    then T.unwords (tail $ init parts) <> last parts
-                    else T.unwords (tail parts)
-        in Add (T.strip $ T.replace "*" "" entity) hasAsterisk
+            entityParts = if hasAsterisk then init (tail parts) else tail parts
+            entities = map T.strip entityParts
+        in Add entities hasAsterisk
 
     "a" | length parts >= 2 ->
         let hasAsterisk = T.isSuffixOf "*" (last parts)
-            entity = if hasAsterisk
-                    then T.unwords (tail $ init parts) <> last parts
-                    else T.unwords (tail parts)
-        in Add (T.strip $ T.replace "*" "" entity) hasAsterisk
+            entityParts = if hasAsterisk then init (tail parts) else tail parts
+            entities = map T.strip entityParts
+        in Add entities hasAsterisk
 
     "upgrade" | length parts >= 2 -> Upgrade (T.unwords $ tail parts)
     "u" | length parts >= 2 -> Upgrade (T.unwords $ tail parts)
 
-    "sell" | length parts >= 2 -> Sell (T.unwords $ tail parts)
-    "s" | length parts >= 2 -> Sell (T.unwords $ tail parts)
+    "sell" | length parts >= 2 -> Sell (map T.strip $ tail parts)
+    "s" | length parts >= 2 -> Sell (map T.strip $ tail parts)
 
     "find" | length parts >= 2 -> Find (T.unwords $ tail parts)
     "f" | length parts >= 2 -> Find (T.unwords $ tail parts)
@@ -278,16 +277,16 @@ executeCommand cmd state = case cmd of
     setSGR [Reset]
     return False
 
-  Add entity printAfter -> do
-    handleAdd state entity printAfter
+  Add entities printAfter -> do
+    handleAdd state entities printAfter
     return True
 
   Upgrade entity -> do
     handleUpgrade state entity
     return True
 
-  Sell champion -> do
-    handleSell state champion
+  Sell champions -> do
+    handleSell state champions
     return True
 
   Find query -> do
@@ -317,8 +316,8 @@ executeCommand cmd state = case cmd of
     return True
 
 -- | Handle add command
-handleAdd :: REPLState -> Text -> Bool -> IO ()
-handleAdd state entity printAfter = do
+handleAdd :: REPLState -> [Text] -> Bool -> IO ()
+handleAdd state entities printAfter = do
   currentState <- readIORef (replGameStateRef state)
 
   -- Get or create game state
@@ -342,28 +341,33 @@ handleAdd state entity printAfter = do
       return defaultState
     Just gs -> return gs
 
-  -- Now proceed with adding the entity
-  do
-      -- Parse entity (could be: ANI, 2ANI, IE, HG, etc.)
+  -- Process each entity in sequence
+  finalState <- foldM (processEntity state) gs entities
+
+  -- Update the state after processing all entities
+  writeIORef (replGameStateRef state) (Just finalState)
+
+  when printAfter $ do
+    putStrLn ""
+    printGameState state
+  where
+    processEntity :: REPLState -> GameState -> Text -> IO GameState
+    processEntity st gs entity = do
       let (stars, shorthand) = parseEntityInput entity
 
-      -- Try to determine type and add
-      result <- addEntity (replGameData state) gs stars shorthand
+      result <- addEntity (replGameData st) gs stars shorthand
 
       case result of
         Left err -> do
           setSGR [SetColor Foreground Vivid Red]
           putStrLn $ "Error: " ++ err
           setSGR [Reset]
+          return gs  -- Return unchanged state on error
         Right newState -> do
-          writeIORef (replGameStateRef state) (Just newState)
           setSGR [SetColor Foreground Vivid Green]
           putStrLn $ "Added " ++ T.unpack shorthand
           setSGR [Reset]
-
-          when printAfter $ do
-            putStrLn ""
-            printGameState state
+          return newState  -- Return updated state
 
 -- | Parse entity input to extract stars and shorthand
 parseEntityInput :: Text -> (Int, Text)
@@ -450,9 +454,9 @@ handleUpgrade state entity = do
               putStrLn $ "Error: Entity not found in game state: " ++ T.unpack shorthand
               setSGR [Reset]
 
--- | Handle sell command
-handleSell :: REPLState -> Text -> IO ()
-handleSell state champion = do
+-- | Handle sell command (with multiple champions)
+handleSell :: REPLState -> [Text] -> IO ()
+handleSell state champions = do
   currentState <- readIORef (replGameStateRef state)
 
   case currentState of
@@ -461,6 +465,12 @@ handleSell state champion = do
       putStrLn "Error: No game state loaded."
       setSGR [Reset]
     Just gs -> do
+      -- Process each champion in sequence
+      finalState <- foldM processChampion gs champions
+      writeIORef (replGameStateRef state) (Just finalState)
+  where
+    processChampion :: GameState -> Text -> IO GameState
+    processChampion gs champion = do
       let shorthand = T.toUpper $ T.strip champion
           champSh = ChampionShorthand shorthand
 
@@ -469,6 +479,7 @@ handleSell state champion = do
           setSGR [SetColor Foreground Vivid Red]
           putStrLn $ "Error: Champion not found: " ++ T.unpack shorthand
           setSGR [Reset]
+          return gs  -- Return unchanged state on error
         Just _ -> do
           -- Calculate gold from sell
           case lookupChampion (replGameData state) champSh of
@@ -476,6 +487,7 @@ handleSell state champion = do
               setSGR [SetColor Foreground Vivid Red]
               putStrLn "Error: Champion data not found"
               setSGR [Reset]
+              return gs  -- Return unchanged state on error
             Just champData -> do
               let cost = maybe 1 id (cdCost champData)
                   level = gsLevel gs
@@ -486,11 +498,10 @@ handleSell state champion = do
                     , gsGold = gsGold gs + goldGained
                     }
 
-              writeIORef (replGameStateRef state) (Just newState)
               setSGR [SetColor Foreground Vivid Green]
               putStrLn $ "Sold " ++ T.unpack shorthand ++ " for " ++ show goldGained ++ " gold"
-              putStrLn $ "New gold: " ++ show (gsGold gs + goldGained)
               setSGR [Reset]
+              return newState  -- Return updated state
 
 -- | Handle level command
 handleLevel :: REPLState -> Maybe Int -> IO ()
@@ -816,6 +827,3 @@ showHelp = do
 -- Helper functions
 unless :: Bool -> IO () -> IO ()
 unless p action = if p then return () else action
-
-when :: Bool -> IO () -> IO ()
-when p action = if p then action else return ()
