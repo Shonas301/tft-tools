@@ -43,18 +43,85 @@ stageRoundParser = do
   roundNum <- intParser
   return (stage, roundNum)
 
--- | Parse board section: [c=2ANI,c=1BLI,...] or []
+-- | Parse board section - supports both new FEN format and legacy format
+-- new format: [ANI.1|1|BLI.2|4/7/7/7/9]
+-- legacy format: [c=ANI.2,c=BLI.1,...]
 boardParser :: Parser [Champion]
-boardParser = between (char '[') (char ']') $ do
-  sepBy championParser (char ',')
+boardParser = between (char '[') (char ']') $
+  try fenBoardParser <|> legacyBoardParser
 
--- | Parse a single champion: c=2ANI
-championParser :: Parser Champion
-championParser = do
-  _ <- string "c="
-  stars <- intParser
+-- | Parse FEN-like board notation
+-- format: row0/row1/row2/row3/bench where each row contains cells separated by |
+fenBoardParser :: Parser [Champion]
+fenBoardParser = do
+  rowStrings <- sepBy1 fenRowStringParser (char '/')
+  -- validate we have 5 rows (4 board + 1 bench)
+  if length rowStrings /= 5
+    then fail $ "Expected 5 rows (4 board + 1 bench), got " ++ show (length rowStrings)
+    else return $ assignFenPositions rowStrings
+
+-- | Parse a single FEN row as list of (isChamp, stars, shorthand, emptyCount)
+fenRowStringParser :: Parser [FenCell]
+fenRowStringParser = sepBy1 fenCellParser (char '|')
+
+-- | Intermediate representation for FEN cells
+data FenCell
+  = FenChamp Int ChampionShorthand  -- stars, shorthand
+  | FenEmpty Int                     -- count of empty cells
+
+-- | Parse a single FEN cell - either a champion or empty count
+fenCellParser :: Parser FenCell
+fenCellParser = try fenChampionCell <|> fenEmptyCell
+
+-- | Parse a champion cell: <SHORTHAND>.<stars>
+fenChampionCell :: Parser FenCell
+fenChampionCell = do
   shorthand <- championShorthandParser
-  return $ Champion stars shorthand
+  _ <- char '.'
+  stars <- intParser
+  return $ FenChamp stars shorthand
+
+-- | Parse empty cells: a number 1-9
+fenEmptyCell :: Parser FenCell
+fenEmptyCell = do
+  emptyCount <- intParser
+  return $ FenEmpty emptyCount
+
+-- | Convert parsed FEN rows to positioned champions
+assignFenPositions :: [[FenCell]] -> [Champion]
+assignFenPositions rows = concatMap assignRowPositions (zip [0..] rows)
+
+-- | Assign positions within a single row
+assignRowPositions :: (Int, [FenCell]) -> [Champion]
+assignRowPositions (rowNum, cells) = go 0 cells
+  where
+    go _ [] = []
+    go col (FenEmpty n : rest) = go (col + n) rest
+    go col (FenChamp stars sh : rest) =
+      Champion stars sh (Position rowNum col) : go (col + 1) rest
+
+-- | Legacy board parser: [c=2ANI,c=1BLI,...]
+legacyBoardParser :: Parser [Champion]
+legacyBoardParser = do
+  champData <- sepBy legacyChampionParser (char ',')
+  -- assign positions to champions in order (left-to-right, top-to-bottom)
+  return $ assignPositions champData allBoardPositions
+
+-- | Parse a legacy champion: c=ANI.2 (returns stars and shorthand)
+legacyChampionParser :: Parser (Int, ChampionShorthand)
+legacyChampionParser = do
+  _ <- string "c="
+  shorthand <- championShorthandParser
+  _ <- char '.'
+  stars <- intParser
+  return (stars, shorthand)
+
+-- | Assign positions to champions in order
+assignPositions :: [(Int, ChampionShorthand)] -> [Position] -> [Champion]
+assignPositions [] _ = []
+assignPositions _ [] = []
+assignPositions ((stars, sh):rest) (pos:positions) =
+  Champion stars sh pos : assignPositions rest positions
 
 -- | Parse champion shorthand (2-4 uppercase alphanumeric chars)
 championShorthandParser :: Parser ChampionShorthand

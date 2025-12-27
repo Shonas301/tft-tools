@@ -1,0 +1,8 @@
+mypy
+pip-tools
+pytest
+pytest-cov
+pytest-sugar
+ruff
+labelme>=5.3.0
+matplotlib>=3.7.0

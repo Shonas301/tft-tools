@@ -82,13 +82,13 @@ Gold:         32
 Health:       67
 
 Board:
-  [2★] Anivia (Cost: 1)
+  [2★] Anivia @ 0,0 (Cost: 1)
       Traits: Freljord, Invoker
-  [2★] Blitzcrank (Cost: 1)
+  [2★] Blitzcrank @ 0,1 (Cost: 1)
       Traits: Zaun, Juggernaut
-  [1★] Viego (Cost: 1)
+  [1★] Viego @ 0,2 (Cost: 1)
       Traits: Shadow Isles, Quickstriker
-  [3★] Ashe (Cost: 2)
+  [3★] Ashe @ 0,3 (Cost: 2)
       Traits: Freljord, Quickstriker
 
 Items:
@@ -269,14 +269,38 @@ cabal test
 - **Stage-Round**: Current stage and round (e.g., `3-5`)
 - **Gold**: Gold amount with 'g' suffix (e.g., `32g`)
 - **Health**: Health amount with 'h' suffix (e.g., `67h`)
-- **Board**: Champions in format `[c=<stars><shorthand>, ...]`
-  - `stars`: 1, 2, or 3
-  - `shorthand`: Champion code from CSV (e.g., ANI for Anivia)
-  - Can be empty: `[]`
+- **Board**: Champions with position encoding (FEN-like notation)
 - **Items**: Items in format `[i=<shorthand>, ...]`
   - Can be empty: `[]`
 - **Augments**: Augments in format `[a=<shorthand>, ...]`
   - Can be empty: `[]`
+
+### Board Position Encoding (FEN-like)
+
+The board uses a FEN-like notation to encode champion positions:
+
+**Structure:**
+- Board: 4 rows × 7 columns (row 0-3, column 0-6)
+- Bench: 1 row × 9 slots (row 4, column 0-8)
+
+**Format:** `[row0/row1/row2/row3/bench]`
+
+Each row contains cells separated by `|`:
+- Champion: `<stars><SHORTHAND>` (e.g., `2ANI`)
+- Empty cells: Number indicating consecutive empties (1-7 for rows, 1-9 for bench)
+
+**Examples:**
+```
+[7/7/7/7/9]                          # empty board
+[2ANI|6/7/7/7/9]                     # 2★ Anivia at (0,0)
+[1ANI|1|2BLI|4/7/7/7/9]              # 1★ Anivia at (0,0), 2★ Blitzcrank at (0,2)
+[7/7/7/7/2|3SEJ|6]                   # 3★ Sejuani on bench slot 2
+```
+
+**Legacy Format (Backward Compatible):**
+
+The parser also accepts the legacy format: `[c=<stars><shorthand>, ...]`
+- Champions are auto-placed in first available positions (left-to-right, top-to-bottom)
 
 ### Shorthand Codes
 
@@ -347,14 +371,12 @@ cabal build
 ## Future Enhancements
 
 Planned improvements:
-- Additional REPL commands for manipulating game state
 - Item-to-champion assignment (e.g., `c=2ANI{IE,RB}`)
-- Board positioning information
 - JSON/YAML output formats
 - Validation of game state legality
-- Round-trip encoding (state → DSL → state)
 - Game state diff/comparison commands
 - Undo/redo functionality in REPL
+- Move command for repositioning champions on the board
 
 ## License
 

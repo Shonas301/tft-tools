@@ -18,13 +18,13 @@ import qualified Data.Text as T
 import Data.Text (Text)
 import qualified Data.Map as M
 import System.Console.ANSI
-import System.IO (hFlush, stdout, Handle, hPutStrLn)
+import System.IO (Handle, hPutStrLn)
 import System.Console.Haskeline
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad (when, foldM)
 import Data.IORef
 import Data.List (find, isPrefixOf)
-import Data.Char (isDigit, toLower)
+import Data.Char (toLower)
 
 -- | REPL state with mutable game state
 data REPLState = REPLState
@@ -38,9 +38,9 @@ data REPLCommand
   = Print           -- Display current TSL
   | Help            -- Show available commands
   | Quit            -- Exit REPL
-  | Add [Text] Bool   -- Add entities (CIA), Bool = print after
-  | Upgrade Text    -- Upgrade champion or item
-  | Sell [Text]       -- Sell champions
+  | Add Text (Maybe Position) Bool   -- Add entity with optional position, Bool = print after
+  | Upgrade Text    -- Upgrade champion by shorthand or position (auto-consume)
+  | Sell [Text]       -- Sell champions by shorthand or position
   | Find Text       -- Find entities by fuzzy search
   | Level (Maybe Int) -- Set or increment level
   | Round (Maybe (Int, Int)) -- Set stage-round
@@ -52,9 +52,9 @@ data REPLCommand
 allCommands :: [(Text, Text)]
 allCommands =
   [ ("print", "Display the current game state as TSL")
-  , ("add <entity>... [*]", "Add one or more champions/items/augments (optional * to print after)")
-  , ("upgrade <entity>", "Upgrade a champion's stars or combine items")
-  , ("sell <champion>...", "Sell one or more champions and gain gold")
+  , ("add <entity>[.stars] [pos] [*]", "Add champion/item/augment at position (pos: 00-36 or B0-B8)")
+  , ("upgrade <entity|pos>", "Upgrade champion (auto-consumes 2 copies)")
+  , ("sell <entity|pos>...", "Sell champions by shorthand or position")
   , ("find <query>", "Search for champions/items/augments by name or shorthand")
   , ("level [n]", "Set level to n, or increment by 1 if no argument")
   , ("round [s r]", "Set stage-round to s-r, or increment if no arguments")
@@ -81,17 +81,8 @@ parseCommand input =
     "exit" | length parts == 1 -> Quit
     "q" | length parts == 1 -> Quit
 
-    "add" | length parts >= 2 ->
-        let hasAsterisk = T.isSuffixOf "*" (last parts)
-            entityParts = if hasAsterisk then init (tail parts) else tail parts
-            entities = map T.strip entityParts
-        in Add entities hasAsterisk
-
-    "a" | length parts >= 2 ->
-        let hasAsterisk = T.isSuffixOf "*" (last parts)
-            entityParts = if hasAsterisk then init (tail parts) else tail parts
-            entities = map T.strip entityParts
-        in Add entities hasAsterisk
+    "add" | length parts >= 2 -> parseAddCommand (tail parts)
+    "a" | length parts >= 2 -> parseAddCommand (tail parts)
 
     "upgrade" | length parts >= 2 -> Upgrade (T.unwords $ tail parts)
     "u" | length parts >= 2 -> Upgrade (T.unwords $ tail parts)
@@ -114,6 +105,42 @@ parseCommand input =
     "" -> Unknown ""
     _ -> Unknown trimmed
   where
+    -- parse add command: add <entity> [position] [*]
+    parseAddCommand :: [Text] -> REPLCommand
+    parseAddCommand [] = Unknown input
+    parseAddCommand [entity] =
+      -- single arg: could be "ani" or "ani.2" or "ani*"
+      let hasAsterisk = T.isSuffixOf "*" entity
+          cleanEntity = if hasAsterisk then T.dropEnd 1 entity else entity
+      in Add cleanEntity Nothing hasAsterisk
+    parseAddCommand [arg1, arg2] =
+      -- two args: entity + position, entity + *, or position + *
+      let hasAsterisk = T.isSuffixOf "*" arg2
+          cleanArg2 = if hasAsterisk then T.dropEnd 1 arg2 else arg2
+      in if hasAsterisk && T.null cleanArg2
+         then -- "add ani *" - entity then asterisk
+           Add arg1 Nothing True
+         else if looksLikePosition arg2
+              then -- "add ani 23" - entity then position
+                Add arg1 (parsePosition arg2) False
+              else if hasAsterisk && looksLikePosition cleanArg2
+                   then -- "add ani 23*" - entity then position with asterisk attached
+                     Add arg1 (parsePosition cleanArg2) True
+                   else -- "add ani *" where * is separate
+                     if arg2 == "*"
+                     then Add arg1 Nothing True
+                     else Add arg1 Nothing False  -- treat second arg as ignored
+    parseAddCommand [entity, pos, asterisk] =
+      -- three args: entity, position, *
+      if asterisk == "*" || T.isSuffixOf "*" asterisk
+      then Add entity (parsePosition pos) True
+      else Add entity (parsePosition pos) False
+    parseAddCommand (entity:rest) =
+      -- more than 3 args: entity, maybe position, maybe *
+      let hasAsterisk = any (\t -> t == "*" || T.isSuffixOf "*" t) rest
+          maybePos = find looksLikePosition rest
+      in Add entity (maybePos >>= parsePosition) hasAsterisk
+
     parseLevel [] = Level Nothing
     parseLevel (n:_) = case reads (T.unpack n) of
       [(val, "")] -> Level (Just val)
@@ -277,8 +304,8 @@ executeCommand cmd state = case cmd of
     setSGR [Reset]
     return False
 
-  Add entities printAfter -> do
-    handleAdd state entities printAfter
+  Add entity maybePos printAfter -> do
+    handleAdd state entity maybePos printAfter
     return True
 
   Upgrade entity -> do
@@ -316,8 +343,8 @@ executeCommand cmd state = case cmd of
     return True
 
 -- | Handle add command
-handleAdd :: REPLState -> [Text] -> Bool -> IO ()
-handleAdd state entities printAfter = do
+handleAdd :: REPLState -> Text -> Maybe Position -> Bool -> IO ()
+handleAdd state entity maybePos printAfter = do
   currentState <- readIORef (replGameStateRef state)
 
   -- Get or create game state
@@ -341,75 +368,90 @@ handleAdd state entities printAfter = do
       return defaultState
     Just gs -> return gs
 
-  -- Process each entity in sequence
-  finalState <- foldM (processEntity state) gs entities
+  -- Parse entity input
+  let (stars, shorthand) = parseEntityInput entity
 
-  -- Update the state after processing all entities
-  writeIORef (replGameStateRef state) (Just finalState)
+  -- Add entity with optional position
+  result <- addEntity (replGameData state) gs stars shorthand maybePos
+
+  case result of
+    Left err -> do
+      setSGR [SetColor Foreground Vivid Red]
+      putStrLn $ "Error: " ++ err
+      setSGR [Reset]
+    Right (newState, posStr) -> do
+      writeIORef (replGameStateRef state) (Just newState)
+      setSGR [SetColor Foreground Vivid Green]
+      putStrLn $ "Added " ++ T.unpack shorthand ++ posStr
+      setSGR [Reset]
 
   when printAfter $ do
     putStrLn ""
     printGameState state
-  where
-    processEntity :: REPLState -> GameState -> Text -> IO GameState
-    processEntity st gs entity = do
-      let (stars, shorthand) = parseEntityInput entity
-
-      result <- addEntity (replGameData st) gs stars shorthand
-
-      case result of
-        Left err -> do
-          setSGR [SetColor Foreground Vivid Red]
-          putStrLn $ "Error: " ++ err
-          setSGR [Reset]
-          return gs  -- Return unchanged state on error
-        Right newState -> do
-          setSGR [SetColor Foreground Vivid Green]
-          putStrLn $ "Added " ++ T.unpack shorthand
-          setSGR [Reset]
-          return newState  -- Return updated state
 
 -- | Parse entity input to extract stars and shorthand
+-- new format: SHORTHAND.stars (e.g., "ANI.2" or "ANI" for 1-star)
 parseEntityInput :: Text -> (Int, Text)
 parseEntityInput input =
   let stripped = T.strip input
       upperInput = T.toUpper stripped
   in if T.null upperInput
      then (1, "")
-     else if isDigit (T.head upperInput)
-          then (read [T.head upperInput], T.tail upperInput)
-          else (1, upperInput)
+     else case T.breakOnEnd "." upperInput of
+            ("", shorthand) -> (1, shorthand)  -- no dot: default 1-star
+            (prefix, starsPart) ->
+              let shorthand = T.dropEnd 1 prefix  -- remove trailing dot
+              in case reads (T.unpack starsPart) of
+                   [(stars, "")] | stars >= 1 && stars <= 3 -> (stars, shorthand)
+                   _ -> (1, upperInput)  -- invalid star level, treat whole thing as shorthand
 
 -- | Add an entity to the game state
-addEntity :: GameData -> GameState -> Int -> Text -> IO (Either String GameState)
-addEntity gameData gs stars shorthand = do
+-- returns either an error or (new state, position info string)
+addEntity :: GameData -> GameState -> Int -> Text -> Maybe Position -> IO (Either String (GameState, String))
+addEntity gameData gs stars shorthand maybePos = do
   let champSh = ChampionShorthand shorthand
       itemSh = ItemShorthand shorthand
       augSh = AugmentShorthand shorthand
 
   -- Try champion first
   case lookupChampion gameData champSh of
-    Just _ -> return $ Right $ gs
-      { gsBoard = gsBoard gs ++ [Champion stars champSh]
-      }
+    Just _ -> do
+      -- determine position: use explicit or find first available
+      let posResult = case maybePos of
+            Just pos ->
+              -- check if position is valid
+              if not (isValidPosition pos)
+              then Left $ "Invalid position: " ++ formatPosition pos
+              -- check if position is occupied
+              else case getChampionAt (gsBoard gs) pos of
+                Just existingChamp ->
+                  let ChampionShorthand existingSh = champShorthand existingChamp
+                  in Left $ "Position " ++ formatPosition pos ++ " is occupied by " ++ T.unpack existingSh
+                Nothing -> Right pos
+            Nothing -> case firstAvailablePosition (gsBoard gs) of
+              Nothing -> Left "No available positions on board or bench"
+              Just pos -> Right pos
+      case posResult of
+        Left err -> return $ Left err
+        Right pos -> return $ Right
+          ( gs { gsBoard = gsBoard gs ++ [Champion stars champSh pos] }
+          , " at " ++ formatPosition pos
+          )
     Nothing ->
-      -- Try item
+      -- Try item (items don't have positions)
       case lookupItem gameData itemSh of
-        Just _ -> return $ Right $ gs
-          { gsItems = gsItems gs ++ [itemSh]
-          }
+        Just _ -> return $ Right (gs { gsItems = gsItems gs ++ [itemSh] }, "")
         Nothing ->
-          -- Try augment
+          -- Try augment (augments don't have positions)
           case lookupAugment gameData augSh of
             Just _ ->
               if length (gsAugments gs) >= 3
               then return $ Left "Cannot add more than 3 augments"
-              else return $ Right $ gs
-                { gsAugments = gsAugments gs ++ [augSh]
-                }
+              else return $ Right (gs { gsAugments = gsAugments gs ++ [augSh] }, "")
             Nothing -> return $ Left $ "Unknown entity: " ++ T.unpack shorthand
 
--- | Handle upgrade command
+-- | Handle upgrade command with auto-consume
+-- finds target by position or shorthand, then consumes 2 other copies of same star level
 handleUpgrade :: REPLState -> Text -> IO ()
 handleUpgrade state entity = do
   currentState <- readIORef (replGameStateRef state)
@@ -420,41 +462,70 @@ handleUpgrade state entity = do
       putStrLn "Error: No game state loaded."
       setSGR [Reset]
     Just gs -> do
-      let shorthand = T.toUpper $ T.strip entity
-          champSh = ChampionShorthand shorthand
-          itemSh = ItemShorthand shorthand
+      let stripped = T.strip entity
 
-      -- Try champion upgrade
-      case find (\c -> champShorthand c == champSh) (gsBoard gs) of
-        Just champ ->
-          if champStars champ >= 3
-          then do
-            setSGR [SetColor Foreground Vivid Red]
-            putStrLn "Error: Champion is already 3-star"
-            setSGR [Reset]
-          else do
-            let newBoard = map (\c -> if champShorthand c == champSh
-                                      then c { champStars = champStars c + 1 }
-                                      else c) (gsBoard gs)
-                newState = gs { gsBoard = newBoard }
-            writeIORef (replGameStateRef state) (Just newState)
-            setSGR [SetColor Foreground Vivid Green]
-            putStrLn $ "Upgraded " ++ T.unpack shorthand ++ " to " ++ show (champStars champ + 1) ++ "-star"
-            setSGR [Reset]
+      -- find target champion by position or shorthand
+      targetResult <- if looksLikePosition stripped
+        then case parsePosition stripped of
+          Nothing -> return $ Left $ "Invalid position: " ++ T.unpack stripped
+          Just pos -> case getChampionAt (gsBoard gs) pos of
+            Nothing -> return $ Left $ "No champion at position " ++ formatPosition pos
+            Just champ -> return $ Right champ
+        else do
+          let shorthand = T.toUpper stripped
+              champSh = ChampionShorthand shorthand
+          case find (\c -> champShorthand c == champSh) (gsBoard gs) of
+            Nothing -> return $ Left $ "Champion not found: " ++ T.unpack shorthand
+            Just champ -> return $ Right champ
 
-        Nothing ->
-          -- Try item upgrade (for now, just show message - full implementation would need component recipes)
-          case lookupItem (replGameData state) itemSh of
-            Just _ -> do
-              setSGR [SetColor Foreground Vivid Yellow]
-              putStrLn "Item upgrade: Component combining not yet fully implemented"
-              setSGR [Reset]
-            Nothing -> do
-              setSGR [SetColor Foreground Vivid Red]
-              putStrLn $ "Error: Entity not found in game state: " ++ T.unpack shorthand
-              setSGR [Reset]
+      case targetResult of
+        Left err -> do
+          setSGR [SetColor Foreground Vivid Red]
+          putStrLn $ "Error: " ++ err
+          setSGR [Reset]
+        Right targetChamp -> upgradeChampion gs targetChamp
+  where
+    upgradeChampion :: GameState -> Champion -> IO ()
+    upgradeChampion gs targetChamp = do
+      let targetSh = champShorthand targetChamp
+          ChampionShorthand shText = targetSh
+          currentStars = champStars targetChamp
+          targetPos = champPosition targetChamp
 
--- | Handle sell command (with multiple champions)
+      if currentStars >= 3
+      then do
+        setSGR [SetColor Foreground Vivid Red]
+        putStrLn $ "Error: " ++ T.unpack shText ++ " is already 3-star"
+        setSGR [Reset]
+      else do
+        -- find 2 other copies with same shorthand AND same star level
+        let otherCopies = filter (\c ->
+              champShorthand c == targetSh &&
+              champStars c == currentStars &&
+              champPosition c /= targetPos) (gsBoard gs)
+
+        if length otherCopies < 2
+        then do
+          setSGR [SetColor Foreground Vivid Red]
+          putStrLn $ "Error: Need 2 more " ++ show currentStars ++ "-star " ++ T.unpack shText ++
+                     " copies to upgrade (found " ++ show (length otherCopies) ++ ")"
+          setSGR [Reset]
+        else do
+          -- consume target + 2 other copies, create upgraded champion at target position
+          let copiesToRemove = take 2 otherCopies
+              positionsToRemove = targetPos : map champPosition copiesToRemove
+              boardWithoutConsumed = filter (\c -> champPosition c `notElem` positionsToRemove) (gsBoard gs)
+              upgradedChamp = Champion (currentStars + 1) targetSh targetPos
+              newBoard = boardWithoutConsumed ++ [upgradedChamp]
+              newState = gs { gsBoard = newBoard }
+
+          writeIORef (replGameStateRef state) (Just newState)
+          setSGR [SetColor Foreground Vivid Green]
+          putStrLn $ "Upgraded " ++ T.unpack shText ++ " to " ++ show (currentStars + 1) ++
+                     "-star at " ++ formatPosition targetPos ++ " (consumed 2 copies)"
+          setSGR [Reset]
+
+-- | Handle sell command (with multiple champions by shorthand or position)
 handleSell :: REPLState -> [Text] -> IO ()
 handleSell state champions = do
   currentState <- readIORef (replGameStateRef state)
@@ -470,38 +541,61 @@ handleSell state champions = do
       writeIORef (replGameStateRef state) (Just finalState)
   where
     processChampion :: GameState -> Text -> IO GameState
-    processChampion gs champion = do
-      let shorthand = T.toUpper $ T.strip champion
-          champSh = ChampionShorthand shorthand
+    processChampion gs target = do
+      let stripped = T.strip target
 
-      case find (\c -> champShorthand c == champSh) (gsBoard gs) of
+      -- check if target looks like a position
+      if looksLikePosition stripped
+      then case parsePosition stripped of
         Nothing -> do
           setSGR [SetColor Foreground Vivid Red]
-          putStrLn $ "Error: Champion not found: " ++ T.unpack shorthand
+          putStrLn $ "Error: Invalid position: " ++ T.unpack stripped
           setSGR [Reset]
-          return gs  -- Return unchanged state on error
-        Just _ -> do
-          -- Calculate gold from sell
-          case lookupChampion (replGameData state) champSh of
-            Nothing -> do
-              setSGR [SetColor Foreground Vivid Red]
-              putStrLn "Error: Champion data not found"
-              setSGR [Reset]
-              return gs  -- Return unchanged state on error
-            Just champData -> do
-              let cost = maybe 1 id (cdCost champData)
-                  level = gsLevel gs
-                  goldGained = level * cost - (if level == 1 then 0 else 1)
-                  newBoard = filter (\c -> champShorthand c /= champSh) (gsBoard gs)
-                  newState = gs
-                    { gsBoard = newBoard
-                    , gsGold = gsGold gs + goldGained
-                    }
+          return gs
+        Just pos -> case getChampionAt (gsBoard gs) pos of
+          Nothing -> do
+            setSGR [SetColor Foreground Vivid Red]
+            putStrLn $ "Error: No champion at position " ++ formatPosition pos
+            setSGR [Reset]
+            return gs
+          Just champ -> sellChampion gs champ
+      else do
+        -- treat as shorthand
+        let shorthand = T.toUpper stripped
+            champSh = ChampionShorthand shorthand
+        case find (\c -> champShorthand c == champSh) (gsBoard gs) of
+          Nothing -> do
+            setSGR [SetColor Foreground Vivid Red]
+            putStrLn $ "Error: Champion not found: " ++ T.unpack shorthand
+            setSGR [Reset]
+            return gs
+          Just champ -> sellChampion gs champ
 
-              setSGR [SetColor Foreground Vivid Green]
-              putStrLn $ "Sold " ++ T.unpack shorthand ++ " for " ++ show goldGained ++ " gold"
-              setSGR [Reset]
-              return newState  -- Return updated state
+    sellChampion :: GameState -> Champion -> IO GameState
+    sellChampion gs champ = do
+      let champSh = champShorthand champ
+          ChampionShorthand shText = champSh
+      case lookupChampion (replGameData state) champSh of
+        Nothing -> do
+          setSGR [SetColor Foreground Vivid Red]
+          putStrLn "Error: Champion data not found"
+          setSGR [Reset]
+          return gs
+        Just champData -> do
+          let cost = maybe 1 id (cdCost champData)
+              champLevel = champStars champ
+              goldGained = champLevel * cost - (if champLevel == 1 then 0 else 1)
+              targetPos = champPosition champ
+              newBoard = filter (\c -> champPosition c /= targetPos) (gsBoard gs)
+              newState = gs
+                { gsBoard = newBoard
+                , gsGold = gsGold gs + goldGained
+                }
+
+          setSGR [SetColor Foreground Vivid Green]
+          putStrLn $ "Sold " ++ T.unpack shText ++ " at " ++ formatPosition targetPos ++ " for " ++ show goldGained ++ " gold"
+          setSGR [Reset]
+          return newState
 
 -- | Handle level command
 handleLevel :: REPLState -> Maybe Int -> IO ()
@@ -779,15 +873,19 @@ displayChampion :: GameData -> Champion -> IO ()
 displayChampion gd champ = do
   let shorthand = champShorthand champ
   let stars = champStars champ
+  let pos = champPosition champ
+  let posStr = if isBenchPosition pos
+               then "bench:" ++ show (posCol pos)
+               else show (posRow pos) ++ "," ++ show (posCol pos)
   case lookupChampion gd shorthand of
-    Nothing -> putStrLn $ "  [" ++ show stars ++ "★] " ++ show shorthand ++ " (unknown champion)"
+    Nothing -> putStrLn $ "  [" ++ show stars ++ "★] " ++ show shorthand ++ " @ " ++ posStr ++ " (unknown champion)"
     Just champData -> do
       let name = T.unpack $ cdName champData
       let costStr = case cdCost champData of
             Just c -> "Cost: " ++ show c
             Nothing -> "Summoned Unit"
       let traits = T.unpack $ T.intercalate ", " (cdTraits champData)
-      putStrLn $ "  [" ++ show stars ++ "★] " ++ name ++ " (" ++ costStr ++ ")"
+      putStrLn $ "  [" ++ show stars ++ "★] " ++ name ++ " @ " ++ posStr ++ " (" ++ costStr ++ ")"
       unless (null traits) $ putStrLn $ "      Traits: " ++ traits
 
 displayItem :: GameData -> ItemShorthand -> IO ()
