@@ -88,6 +88,7 @@ library
                     , REPL
                     , CLI
                     , Encoder
+                    , Probability
 
     -- Dependencies
     build-depends:    base ^>=4.18.3.0
@@ -165,6 +166,7 @@ test-suite tft-dsl-test
     -- Test modules
     other-modules:    ParserSpec
                     , REPLSpec
+                    , ProbabilitySpec
 
     -- Dependencies
     build-depends:    base ^>=4.18.3.0

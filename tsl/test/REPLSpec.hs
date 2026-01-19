@@ -72,6 +72,28 @@ spec = do
       parseCommand "f ani" `shouldBe` Find "ani"
       parseCommand "find infinity edge" `shouldBe` Find "infinity edge"
 
+    it "parses 'odds' command" $ do
+      parseCommand "odds ani" `shouldBe` Odds "ANI" Nothing False
+      parseCommand "o ani" `shouldBe` Odds "ANI" Nothing False
+      parseCommand "odds ani 8" `shouldBe` Odds "ANI" (Just 8) False
+      parseCommand "odds ani *" `shouldBe` Odds "ANI" Nothing True
+      parseCommand "odds ani 8*" `shouldBe` Odds "ANI" (Just 8) True
+      parseCommand "odds ani 8 *" `shouldBe` Odds "ANI" (Just 8) True
+
+    it "parses 'expected' command" $ do
+      parseCommand "expected ani 3" `shouldBe` Expected "ANI" 3 Nothing False
+      parseCommand "e ani 3" `shouldBe` Expected "ANI" 3 Nothing False
+      parseCommand "expected ani 3 5" `shouldBe` Expected "ANI" 3 (Just 5) False
+      parseCommand "expected ani 9 0 *" `shouldBe` Expected "ANI" 9 (Just 0) True
+      parseCommand "e ani 3*" `shouldBe` Expected "ANI" 3 Nothing True
+
+    it "parses 'pool' command" $ do
+      parseCommand "pool" `shouldBe` Pool Nothing
+      parseCommand "pool 1" `shouldBe` Pool (Just 1)
+      parseCommand "pool 3" `shouldBe` Pool (Just 3)
+      parseCommand "pool 5" `shouldBe` Pool (Just 5)
+      parseCommand "pool 6" `shouldBe` Pool Nothing  -- invalid cost, falls back to Nothing
+
   describe "parseEntityInput" $ do
     it "parses entity without star level (default 1-star)" $ do
       parseEntityInput "ANI" `shouldBe` (1, "ANI")
@@ -130,3 +152,6 @@ spec = do
       commandNames `shouldContain` ["upgrade <entity|pos>"]
       commandNames `shouldContain` ["sell <entity|pos>..."]
       commandNames `shouldContain` ["find <query>"]
+      commandNames `shouldContain` ["odds <champ> [taken] [*]"]
+      commandNames `shouldContain` ["expected <champ> <want> [taken] [*]"]
+      commandNames `shouldContain` ["pool [cost]"]

@@ -14,6 +14,7 @@ import Types
 import Parser (parseGameState)
 import DataLoader
 import Encoder
+import Probability
 import qualified Data.Text as T
 import Data.Text (Text)
 import qualified Data.Map as M
@@ -45,6 +46,9 @@ data REPLCommand
   | Level (Maybe Int) -- Set or increment level
   | Round (Maybe (Int, Int)) -- Set stage-round
   | Money Int       -- Set gold amount
+  | Odds Text (Maybe Int) Bool  -- Odds <champion> [taken] [*verbose]
+  | Expected Text Int (Maybe Int) Bool  -- Expected <champion> <want> [taken] [*verbose]
+  | Pool (Maybe Int) -- Pool [cost tier]
   | Unknown Text    -- Unknown command
   deriving (Show, Eq)
 
@@ -59,6 +63,9 @@ allCommands =
   , ("level [n]", "Set level to n, or increment by 1 if no argument")
   , ("round [s r]", "Set stage-round to s-r, or increment if no arguments")
   , ("money <n>", "Set gold to n")
+  , ("odds <champ> [taken] [*]", "Probability of hitting champion (* for verbose)")
+  , ("expected <champ> <want> [taken] [*]", "Expected gold to hit <want> copies")
+  , ("pool [cost]", "Show pool sizes for cost tier(s)")
   , ("help", "Show this help message")
   , ("quit", "Exit the REPL (aliases: exit, q)")
   ]
@@ -101,6 +108,14 @@ parseCommand input =
 
     "money" | length parts >= 2 -> parseMoney (tail parts)
     "m" | length parts >= 2 -> parseMoney (tail parts)
+
+    "odds" | length parts >= 2 -> parseOdds (tail parts)
+    "o" | length parts >= 2 -> parseOdds (tail parts)
+
+    "expected" | length parts >= 3 -> parseExpected (tail parts)
+    "e" | length parts >= 3 -> parseExpected (tail parts)
+
+    "pool" -> parsePool (tail parts)
 
     "" -> Unknown ""
     _ -> Unknown trimmed
@@ -156,6 +171,50 @@ parseCommand input =
       [(val, "")] -> Money val
       _ -> Unknown input
     parseMoney _ = Unknown input
+
+    -- parse odds command: odds <champ> [taken] [*]
+    parseOdds :: [Text] -> REPLCommand
+    parseOdds [] = Unknown input
+    parseOdds args =
+      let hasVerbose = any (\t -> t == "*" || T.isSuffixOf "*" t) args
+          cleanArgs = map (\t -> if T.isSuffixOf "*" t then T.dropEnd 1 t else t) $
+                      filter (/= "*") args
+          -- first arg is champion, second (if numeric) is taken count
+          (champ, taken) = case cleanArgs of
+            [c] -> (c, Nothing)
+            [c, n] -> case reads (T.unpack n) of
+              [(val, "")] -> (c, Just val)
+              _ -> (c, Nothing)
+            _ -> (head cleanArgs, Nothing)
+      in if T.null champ
+         then Unknown input
+         else Odds (T.toUpper champ) taken hasVerbose
+
+    -- parse expected command: expected <champ> <want> [taken] [*]
+    parseExpected :: [Text] -> REPLCommand
+    parseExpected args =
+      let hasVerbose = any (\t -> t == "*" || T.isSuffixOf "*" t) args
+          cleanArgs = map (\t -> if T.isSuffixOf "*" t then T.dropEnd 1 t else t) $
+                      filter (/= "*") args
+      in case cleanArgs of
+           (c:wantStr:rest) ->
+             case reads (T.unpack wantStr) of
+               [(want, "")] ->
+                 let taken = case rest of
+                       (n:_) -> case reads (T.unpack n) of
+                                  [(val, "")] -> Just val
+                                  _ -> Nothing
+                       _ -> Nothing
+                 in Expected (T.toUpper c) want taken hasVerbose
+               _ -> Unknown input
+           _ -> Unknown input
+
+    -- parse pool command: pool [cost]
+    parsePool :: [Text] -> REPLCommand
+    parsePool [] = Pool Nothing
+    parsePool (n:_) = case reads (T.unpack n) of
+      [(cost, "")] | cost >= 1 && cost <= 5 -> Pool (Just cost)
+      _ -> Pool Nothing
 
 -- | Completion function for Haskeline
 completeFunc :: GameData -> CompletionFunc IO
@@ -330,6 +389,18 @@ executeCommand cmd state = case cmd of
 
   Money amount -> do
     handleMoney state amount
+    return True
+
+  Odds champ taken verbose -> do
+    handleOdds state champ taken verbose
+    return True
+
+  Expected champ want taken verbose -> do
+    handleExpected state champ want taken verbose
+    return True
+
+  Pool maybeCost -> do
+    handlePool state maybeCost
     return True
 
   Unknown "" -> return True  -- Empty input
@@ -706,6 +777,93 @@ handleMoney state amount = do
   setSGR [SetColor Foreground Vivid Green]
   putStrLn $ "Gold set to " ++ show newGold
   setSGR [Reset]
+
+-- | Handle odds command
+handleOdds :: REPLState -> Text -> Maybe Int -> Bool -> IO ()
+handleOdds state champSh' maybeTaken verbose = do
+  currentState <- readIORef (replGameStateRef state)
+  let gameData = replGameData state
+      champSh = ChampionShorthand champSh'
+
+  case lookupChampion gameData champSh of
+    Nothing -> do
+      setSGR [SetColor Foreground Vivid Red]
+      putStrLn $ "Unknown champion: " ++ T.unpack champSh'
+      setSGR [Reset]
+    Just champData -> do
+      let cost = maybe 1 id (cdCost champData)
+          effectiveCost = if cost == 7 then 5 else cost
+          level = maybe 1 gsLevel currentState
+          taken = maybe 0 id maybeTaken
+          poolSize = poolSizeForCost effectiveCost
+          copiesRemaining = max 0 (poolSize - taken)
+          tierTotal = tierTotalPool gameData effectiveCost
+          tierRemaining = tierTotal - taken  -- simplified: only tracking this champ
+          tierOdds = rollOdds level effectiveCost
+          slotProb = slotProbability tierOdds copiesRemaining tierRemaining
+          shopProb = shopProbability slotProb
+
+      setSGR [SetColor Foreground Vivid Cyan]
+      if verbose
+        then putStr $ formatOddsVerbose (cdName champData) cost level copiesRemaining tierRemaining poolSize tierOdds slotProb shopProb
+        else putStrLn $ formatOddsCompact (cdName champData) cost level copiesRemaining tierRemaining poolSize shopProb
+      setSGR [Reset]
+
+-- | Handle expected command
+handleExpected :: REPLState -> Text -> Int -> Maybe Int -> Bool -> IO ()
+handleExpected state champSh' want maybeTaken verbose = do
+  currentState <- readIORef (replGameStateRef state)
+  let gameData = replGameData state
+      champSh = ChampionShorthand champSh'
+
+  case lookupChampion gameData champSh of
+    Nothing -> do
+      setSGR [SetColor Foreground Vivid Red]
+      putStrLn $ "Unknown champion: " ++ T.unpack champSh'
+      setSGR [Reset]
+    Just champData -> do
+      let cost = maybe 1 id (cdCost champData)
+          effectiveCost = if cost == 7 then 5 else cost
+          level = maybe 1 gsLevel currentState
+          taken = maybe 0 id maybeTaken
+          poolSize = poolSizeForCost effectiveCost
+          copiesRemaining = max 0 (poolSize - taken)
+          tierTotal = tierTotalPool gameData effectiveCost
+          tierRemaining = tierTotal - taken
+          tierOdds = rollOdds level effectiveCost
+
+      if copiesRemaining < want
+        then do
+          setSGR [SetColor Foreground Vivid Red]
+          putStrLn $ "Impossible: only " ++ show copiesRemaining ++ " copies remaining, want " ++ show want
+          setSGR [Reset]
+        else do
+          let expectedGold = expectedGoldToHit want cost tierOdds copiesRemaining tierRemaining poolSize
+
+          setSGR [SetColor Foreground Vivid Cyan]
+          if verbose
+            then putStr $ formatExpectedVerbose (cdName champData) want cost level copiesRemaining tierRemaining poolSize tierOdds expectedGold
+            else putStrLn $ formatExpectedCompact (cdName champData) want cost expectedGold
+          setSGR [Reset]
+
+-- | Handle pool command
+handlePool :: REPLState -> Maybe Int -> IO ()
+handlePool state maybeCost = do
+  let gameData = replGameData state
+
+  setSGR [SetColor Foreground Vivid Cyan, SetConsoleIntensity BoldIntensity]
+  putStrLn "Pool Status:"
+  setSGR [Reset]
+  putStrLn ""
+
+  case maybeCost of
+    Nothing -> do
+      -- show all tiers
+      mapM_ (\c -> putStrLn $ "  " ++ formatPoolStatus gameData c) [1..5]
+    Just cost -> do
+      putStrLn $ "  " ++ formatPoolStatus gameData cost
+
+  putStrLn ""
 
 -- | Handle find command
 handleFind :: REPLState -> Text -> IO ()
